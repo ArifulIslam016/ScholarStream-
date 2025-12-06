@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import useAuthhooks from '../../hooks/Authhooks';
-
+import logoImg from '../../assets/SchorarStream Logo.png'
 const Navbar = () => {
     
   const {user,logOut}=useAuthhooks()
@@ -10,7 +10,7 @@ const Navbar = () => {
   <li> <NavLink to={'/'}>All Scholarship</NavLink></li>
   </>
     return (
-       <div className="navbar bg-base-100 shadow-sm">
+       <div className="navbar bg-primary shadow-sm">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -22,7 +22,7 @@ const Navbar = () => {
        {links}
       </ul>
     </div>
-    <Link className="btn btn-ghost text-xl">ScholarStream</Link>
+    <Link className="btn btn-ghost text-xl text-neutral flex items-center"><img src={logoImg}  className='max-w-[100px] h-12' alt="" /> ScholarStream</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

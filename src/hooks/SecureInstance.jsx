@@ -8,25 +8,25 @@ const secureInstance=axios.create({
 const useSecureInstance =() => {
     const navigate=useNavigate()
     const {user,logOut}=useAuthhooks();
-//   useEffect(()=>{
-//     const requestIncerceptor=  secureInstance.interceptors.request.use((config)=>{
-//           config.headers.Authorization= `Bearer ${user.accessToken}`
-//         return config
-//     })
-//     const responseInterceptor=secureInstance.interceptors.response.use((res)=>{
-//         return res
-//     },(err)=>{
-//         if(err.status===403||err.status===401){
-//             logOut()
-//             navigate('/login')
-//         }
-//         return Promise.reject(err)
-//     })
-//     return ()=>{
-//         secureInstance.interceptors.request.eject(requestIncerceptor)
-//         secureInstance.interceptors.response.eject(responseInterceptor)
-//     }
-//   },[user,logOut,navigate])
+  useEffect(()=>{
+    const requestIncerceptor=  secureInstance.interceptors.request.use((config)=>{
+          config.headers.Authorization= `Bearer ${user.accessToken}`
+        return config
+    })
+    const responseInterceptor=secureInstance.interceptors.response.use((res)=>{
+        return res
+    },(err)=>{
+        if(err.status===403||err.status===401){
+            logOut()
+            navigate('/login')
+        }
+        return Promise.reject(err)
+    })
+    return ()=>{
+        secureInstance.interceptors.request.eject(requestIncerceptor)
+        secureInstance.interceptors.response.eject(responseInterceptor)
+    }
+  },[user,logOut,navigate])
     return secureInstance;
 };
 

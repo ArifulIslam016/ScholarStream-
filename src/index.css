@@ -1,2 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #1E3A8A;   /* Brand Blue */
+  --color-secondary: #16E2F5; /* Stream Cyan (Accent) */
+  --color-neutral: #E5E7EB;   /* Light Grey / borders & subtle bg */
+}
+.active{
+  background-color:#CAEB66;
+  border-radius: 16px;
+}
