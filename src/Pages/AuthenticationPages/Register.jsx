@@ -4,10 +4,12 @@ import axios from "axios";
 import useSecureInstance from "../../hooks/SecureInstance";
 import useAuthhooks from "../../hooks/Authhooks";
 import SocialLoginGoogle from "../../Components/SocialLogin/SocialLoginGoogle";
+import { useState } from "react";
 
 const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [firebaseError,setFirebaseError]=useState('')
   const Instance = useSecureInstance();
   const { UpdateUserProfile, CreateUser,test } = useAuthhooks();
 console.log(test,UpdateUserProfile)
@@ -20,6 +22,7 @@ console.log(test,UpdateUserProfile)
     const profileImg = data.photo[0];
     CreateUser(data.email, data.password)
       .then(() => {
+        setFirebaseError('')
         const formData = new FormData();
         formData.append("image", profileImg);
         const imagebbHostApi = `https://api.imgbb.com/1/upload?key=${
@@ -49,6 +52,7 @@ console.log(test,UpdateUserProfile)
       })
       .catch((eror) => {
         console.log(eror);
+        setFirebaseError(eror)
       });
   };
   return (
@@ -118,6 +122,7 @@ console.log(test,UpdateUserProfile)
           <button className="btn  outline-0 focus:outline-0 focus:ring-0 border-0 bg-primary mt-4">
             Register
           </button>
+          {firebaseError&&<p className="text-red-500">{firebaseError.code.split('/')[1].split('-').join(" ")}</p>}
         </fieldset>
       </form>
       <p>

@@ -18,19 +18,15 @@ console.log(test,user)
           photoURL: data?.user?.photoURL,
           email: data?.user?.email,
         };
-        // try {
-        //   const res = await Instance.post("/users", userInfo);
-        //   // console.log("Succsess Block", res);
-        //   if (res?.data?.insertedId) {
-        //     navigate(location.state || "/");
-        //   }
-        // }catch (err) {
-        //   navigate('/')
-        //   console.log(
-        //     "Error Block",
-        //     console.log(err)
-        //   );
-        // }
+        try {
+          const res = await Instance.post("/users", userInfo);
+          if (res?.data?.insertedId) {
+            navigate(location.state || "/");
+          }
+        }catch (err) {
+          navigate('/')
+     ;
+        }
         console.log(userInfo)
       })
 
