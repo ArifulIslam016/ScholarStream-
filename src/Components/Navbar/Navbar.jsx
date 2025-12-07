@@ -8,6 +8,7 @@ const Navbar = () => {
   const links=<>
   <li> <NavLink to={'/'}>Home</NavLink></li>
   <li> <NavLink to={'/'}>All Scholarship</NavLink></li>
+ 
   </>
     return (
        <div className="navbar bg-primary shadow-sm">
@@ -22,7 +23,7 @@ const Navbar = () => {
        {links}
       </ul>
     </div>
-    <Link className="btn btn-ghost text-xl text-neutral flex items-center"><img src={logoImg}  className='max-w-[100px] h-12' alt="" /> ScholarStream</Link>
+    <Link className="btn btn-ghost text-xl text-neutral hover:text-black flex items-center"><img src={logoImg}  className='max-w-[100px] h-12' alt="" /> <span className='hidden md:block'>ScholarStream</span></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -53,8 +54,8 @@ const Navbar = () => {
       </ul>
     </div>
   </div>:<div className='flex gap-2'>
-          <Link to={'/login'} className="btn btn-primary">Login</Link>
-    <Link to={'/register'}className="btn btn-primary">Register</Link></div>}
+          <Link to={'/login'} className="btn outline-0 border-0  bg-gradient-to-l from-[#16E2F5] to-[#1E90FF]">Login</Link>
+    <Link to={'/register'}className="btn outline-0 border-0  bg-gradient-to-l from-[#16E2F5] to-[#1E90FF]">Register</Link></div>}
   </div>
 </div>
     );

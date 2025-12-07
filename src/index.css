@@ -3,10 +3,10 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #1E3A8A;   /* Brand Blue */
-  --color-secondary: #16E2F5; /* Stream Cyan (Accent) */
-  --color-neutral: #E5E7EB;   /* Light Grey / borders & subtle bg */
-}
+  --color-primary: #1E3A8A;   
+  --color-secondary: #16E2F5; 
+  --color-neutral: #E5E7EB;   
+  --color-accent: #1E3A8A;   }
 .active{
   background-color:#CAEB66;
   border-radius: 16px;
