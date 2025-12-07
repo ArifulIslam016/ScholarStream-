@@ -4,7 +4,7 @@
   name: "light";
   default: true;
   --color-primary: #1E3A8A;   
-  --color-secondary: #16E2F5; 
+  --color-secondary: #eafaf9; 
   --color-neutral: #E5E7EB;   
   --color-accent: #1E3A8A;   }
 .active{

@@ -47,12 +47,12 @@ const SuccessStories = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, }}
-            className="bg-[#eafaf9] shadow-md rounded-2xl p-6  hover:shadow-xl transition"
+            className="bg-secondary shadow-md rounded-2xl p-6  hover:shadow-xl transition"
           >
             <img
               src={item.img}
               alt={item.name}
-              className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-[#16E2F5]"
+              className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-[#bdc2c2]"
             />
 
             <h3 className="text-xl font-semibold text-center mt-4 text-[#1d695e]">
