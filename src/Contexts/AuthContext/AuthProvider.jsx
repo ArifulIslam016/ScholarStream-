@@ -13,18 +13,18 @@ import { auth } from "../../../firebase";
 const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsloading] = useState(true);
+  const [userLoading, setUserloading] = useState(true);
   const CreateUser = (email, password) => {
-    setIsloading(true);
+    setUserloading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const signInUser = (email, password) => {
-    setIsloading(true);
+    setUserloading(true);
 
     return signInWithEmailAndPassword(auth, email, password);
   };
   const googleSocialLogin = () => {
-    setIsloading(true);
+    setUserloading(true);
 
     return signInWithPopup(auth, googleProvider);
   };
@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-      setIsloading(false);
+      setUserloading(false);
     });
     return () => {
       unsubcribe();
@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
     googleSocialLogin,
     logOut,
     user,
-    isLoading,
+   userLoading,
     UpdateUserProfile,
   };
   return <Authcontext value={AuthInfo}>{children}</Authcontext>;

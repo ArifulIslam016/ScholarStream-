@@ -6,8 +6,8 @@ const Navbar = () => {
     
   const {user,logOut}=useAuthhooks()
   const links=<>
-  <li> <NavLink to={'/'}>Home</NavLink></li>
-  <li> <NavLink to={'/'}>All Scholarship</NavLink></li>
+  <li> <NavLink className='text-white' to={'/'}>Home</NavLink></li>
+  <li> <NavLink className='text-white' to={'/'}>All Scholarship</NavLink></li>
  
   </>
     return (
@@ -49,7 +49,7 @@ const Navbar = () => {
           
           </Link>
         </li>
-        <li><Link className='btn btn-primary'>Dashboard</Link></li>
+        <li><Link to={'dashboard'} className='btn btn-primary'>Dashboard</Link></li>
         <li><button onClick={logOut} className='btn btn-warning'>Logout</button></li>
       </ul>
     </div>

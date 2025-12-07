@@ -57,7 +57,7 @@ console.log(test,UpdateUserProfile)
   };
   return (
     <div className="card bg-base-100 p-10 mx-auto my-10 w-full max-w-sm shrink-0 shadow-2xl">
-      <h1 className="text-3xl font-extrabold text-neutral">
+      <h1 className="text-3xl font-extrabold title">
         Register to login
       </h1>
       <form onSubmit={handleSubmit(handleRegister)}>
@@ -119,7 +119,7 @@ console.log(test,UpdateUserProfile)
           {/* <div>
             <a className="link link-hover">Forgot password?</a>
           </div> */}
-          <button className="btn  outline-0 focus:outline-0 focus:ring-0 border-0 bg-primary mt-4">
+          <button className="btn  outline-0 focus:outline-0 focus:ring-0 border-0  bg-gradient-to-l from-[#16E2F5] to-[#1E90FF] mt-4">
             Register
           </button>
           {firebaseError&&<p className="text-red-500">{firebaseError.code.split('/')[1].split('-').join(" ")}</p>}

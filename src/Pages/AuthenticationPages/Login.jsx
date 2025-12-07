@@ -25,7 +25,7 @@ const Login = () => {
   };
   return (
     <div className="card bg-base-100 p-10 mx-auto w-full max-w-sm shrink-0 shadow-2xl">
-      <h1 className="text-3xl font-extrabold text-neutral">Welcome Back</h1>
+      <h1 className="text-3xl font-extrabold title">Please Login</h1>
 
       <form onSubmit={handleSubmit(handleLogin)}>
         <fieldset className="fieldset">
@@ -55,13 +55,13 @@ const Login = () => {
           {/* <div>
             <a className="link link-hover">Forgot password?</a>
           </div> */}
-          <button className="btn   outline-0 focus:outline-0 focus:ring-0 border-0 bg-primary mt-4">
+          <button className="btn  bg-gradient-to-l from-[#16E2F5] to-[#1E90FF]  outline-0 focus:outline-0 focus:ring-0 border-0  mt-4">
             Login
           </button>
         </fieldset>
       </form>
       <p>
-        New to Zapshipt?{" "}
+        You dont have any account?{" "}
         <Link state={location.state} className="text-pink-500 underline" to={"/register"}>
           Register
         </Link>
