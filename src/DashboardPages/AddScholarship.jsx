@@ -1,9 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuthhooks from "../hooks/Authhooks";
+import axios from "axios";
+import useSecureInstance from "../hooks/SecureInstance";
 
 const AddScholarship = () => {
     const {user}=useAuthhooks()
+    const Instance=useSecureInstance()
   const {
     register,
     handleSubmit,
@@ -13,7 +16,23 @@ const AddScholarship = () => {
     const applicationInfo=data
     applicationInfo.postdate=new Date()
      applicationInfo.userEmail=user.email
-     console.log(applicationInfo)
+     const universityFormData=new FormData()
+     console.log(data.photo)
+     universityFormData.append('image',data.photo[0])
+    //  console.log(applicationInfo)
+        delete applicationInfo.photo
+
+    const imagebbHostApi = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_Image_host_key
+        }`;
+        axios
+          .post(imagebbHostApi, universityFormData)
+          .then((universityImagedata) => {
+            console.log(universityImagedata)
+           applicationInfo.universityImage=universityImagedata.data.data.url
+            console.log(applicationInfo)
+            // Instance.post('/Scholarships',applicationInfo)
+            });
   };
   return (
     <div>
