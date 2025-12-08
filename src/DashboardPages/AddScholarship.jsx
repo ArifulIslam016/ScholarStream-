@@ -1,38 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuthhooks from "../hooks/Authhooks";
 import axios from "axios";
 import useSecureInstance from "../hooks/SecureInstance";
+import Swal from "sweetalert2";
 
 const AddScholarship = () => {
-    const {user}=useAuthhooks()
-    const Instance=useSecureInstance()
+  const [formLoading, setformLoading] = useState(false);
+  const { user } = useAuthhooks();
+  const Instance = useSecureInstance();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const handleAddScholarship = (data) => {
-    const applicationInfo=data
-    applicationInfo.postdate=new Date()
-     applicationInfo.userEmail=user.email
-     const universityFormData=new FormData()
-     console.log(data.photo)
-     universityFormData.append('image',data.photo[0])
-    //  console.log(applicationInfo)
-        delete applicationInfo.photo
+    setformLoading(true);
+    const sholarchipInfo = data;
+    sholarchipInfo.postedUserEmail = user.email;
+    const universityFormData = new FormData();
+    console.log(data.photo);
+    universityFormData.append("image", data.photo[0]);
+    //  console.log(sholarchipInfo)
+    delete sholarchipInfo.photo;
 
     const imagebbHostApi = `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_Image_host_key
-        }`;
-        axios
-          .post(imagebbHostApi, universityFormData)
-          .then((universityImagedata) => {
-            console.log(universityImagedata)
-           applicationInfo.universityImage=universityImagedata.data.data.url
-            console.log(applicationInfo)
-            // Instance.post('/Scholarships',applicationInfo)
+      import.meta.env.VITE_Image_host_key
+    }`;
+    axios
+      .post(imagebbHostApi, universityFormData)
+      .then((universityImagedata) => {
+        console.log(universityImagedata);
+        sholarchipInfo.universityImage = universityImagedata.data.data.url;
+        console.log(sholarchipInfo);
+        Instance.post("/scholarships", sholarchipInfo)
+          .then((res) => {
+            setformLoading(false);
+            console.log(res);
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Scholarship addes succesfully",
+                showClass: {
+                  popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `,
+                },
+                hideClass: {
+                  popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `,
+                },
+              });
+              reset();
+            }
+          })
+          .catch(() => {
+            setformLoading(false);
+
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
             });
+          });
+      });
   };
   return (
     <div>
@@ -181,7 +217,7 @@ const AddScholarship = () => {
               </select>
               <span className="label">Optional</span>
             </fieldset>
-            {errors?.degree ?.type === "required" && (
+            {errors?.degree?.type === "required" && (
               <p className="text-red-400">Select Degree</p>
             )}
             <div>
@@ -190,7 +226,7 @@ const AddScholarship = () => {
                 type="number"
                 placeholder="Tution fee"
                 className="input w-full"
-                {...register('tuitionFees')}
+                {...register("tuitionFees")}
               />
             </div>
             {/* Application fee */}
@@ -201,11 +237,11 @@ const AddScholarship = () => {
                 placeholder="Application Fees"
                 className="input w-full"
                 min="0"
-                {...register('applicationFees',{required:true})}
+                {...register("applicationFees", { required: true })}
               />
-               {errors?.applicationFees ?.type === "required" && (
-              <p className="text-red-400">Fee required</p>
-            )}
+              {errors?.applicationFees?.type === "required" && (
+                <p className="text-red-400">Fee required</p>
+              )}
             </div>
             <div>
               <label className="label">Service Charge</label>
@@ -214,19 +250,23 @@ const AddScholarship = () => {
                 placeholder="Service Charge"
                 className="input w-full"
                 min="0"
-                {...register('serviceCharge',{required:true})}
+                {...register("serviceCharge", { required: true })}
               />
-               {errors?.serviceCharge ?.type === "required" && (
-              <p className="text-red-400">Service Charge required</p>
-            )}
+              {errors?.serviceCharge?.type === "required" && (
+                <p className="text-red-400">Service Charge required</p>
+              )}
             </div>
             {/* Deadline date  */}
             <div>
               <label className="label">Deadline</label>
-              <input type="date" className="input w-full" {...register('applicationDeadline',{required:true})} />
-               {errors?.applicationDeadline ?.type === "required" && (
-              <p className="text-red-400">Give a deadline</p>
-            )}
+              <input
+                type="date"
+                className="input w-full"
+                {...register("applicationDeadline", { required: true })}
+              />
+              {errors?.applicationDeadline?.type === "required" && (
+                <p className="text-red-400">Give a deadline</p>
+              )}
             </div>
           </div>
           <button
@@ -237,6 +277,9 @@ const AddScholarship = () => {
           </button>
         </form>
       </div>
+      {formLoading&&  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+      <span className="loading loading-bars loading-xl"></span>
+    </div>}
     </div>
   );
 };
