@@ -7,7 +7,7 @@ const Navbar = () => {
   const {user,logOut}=useAuthhooks()
   const links=<>
   <li> <NavLink className='text-white' to={'/'}>Home</NavLink></li>
-  <li> <NavLink className='text-white' to={'/'}>All Scholarship</NavLink></li>
+  <li> <NavLink className='text-white' to={'/allscholarship'}>All Scholarship</NavLink></li>
  
   </>
     return (

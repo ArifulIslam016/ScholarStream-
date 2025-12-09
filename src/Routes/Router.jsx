@@ -7,6 +7,7 @@ import RootLayout from "../Layouts/RootLayout";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import AddScholarship from "../DashboardPages/AddScholarship";
+import AllScholarship from "../Pages/AllScholarship";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
+      {
+        path: "/allscholarship",
+        Component: AllScholarship,
+      },
     ],
   },
   {
@@ -35,9 +40,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "addScholarship", 
-        element:<AddScholarship></AddScholarship>
-      }
+      { path: "addScholarship", element: <AddScholarship></AddScholarship> },
     ],
   },
 ]);

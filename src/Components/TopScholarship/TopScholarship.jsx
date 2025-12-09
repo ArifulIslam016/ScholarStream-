@@ -10,7 +10,7 @@ const TopScholarship = () => {
   const {data:topScholarships=[],isLoading}=useQuery({
     queryKey:['topScholarship'],
     queryFn:async()=>{
-     const res=await Instance.get(`http://localhost:3000/scholarships?sortby=postdate&order=desc`)
+     const res=await Instance.get(`/scholarships?sortby=postdate&order=desc`)
      return res.data.ScholarshipData
     }
   })
