@@ -43,7 +43,7 @@ const ScholarshipCard = ({ scholarshipdata }) => {
           <span className="font-semibold">${applicationFees}</span>
         </p>
 
-        <p className="text-xs bg-[#1d695e]/10 text-[#1d695e] w-fit px-2 py-1 rounded-md">
+        <p className="text-xs bg-[#1d695e]/10 text-[#0b5e52] w-fit px-2 py-1 rounded-md">
           {scholarshipCategory}
         </p>
 
