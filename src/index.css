@@ -8,7 +8,10 @@
   --color-neutral: #E5E7EB;   
   --color-accent: #1E3A8A;   }
 .active{
-  background-color:#CAEB66;
+ border-bottom:2px solid white;
+ border-top:1px solid white;
+ border-right:1px solid white;
+ border-left:1px solid white;
   border-radius: 16px;
 }
 .title{
