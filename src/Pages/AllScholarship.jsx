@@ -10,25 +10,19 @@ const AllScholarship = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["allScholarship"],
     queryFn: async () => {
-      const res =await Instance.get(`/scholarships`);
-      console.log(res)
+      const res = await Instance.get(`/scholarships`);
       return res.data;
     },
   });
-  if(isLoading){
-    return <LoadingPage></LoadingPage>
+  if (isLoading) {
+    return <LoadingPage></LoadingPage>;
   }
-//   console.log(data)
+  //   console.log(data)
   return (
     <div className="my-10">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl text-center font-bold text-[#1d695e] "
-      >
-        All Scholarship
-      </motion.h1>
+      <div>
+        <h1 className="text-2xl pl-1 md:pl-3 font-bold text-[#1d695e] ">Total {data.ScholarshipData.length} Scholarships Found</h1>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
         {data.ScholarshipData.map((scholarshipdata, index) => {
           return (

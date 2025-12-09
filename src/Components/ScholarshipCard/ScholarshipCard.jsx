@@ -20,7 +20,7 @@ const ScholarshipCard = ({ scholarshipdata }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="bg-white border-0 p-1 shadow-2xl rounded-xl overflow-hidden border hover:shadow-xl transition"
+      className="bg-white border-0 p-1 shadow-2xl rounded-xl flex flex-col justify-between h-full overflow-hidden border hover:shadow-xl transition"
     >
       <img
         src={universityImage}

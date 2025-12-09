@@ -14,7 +14,6 @@ const TopScholarship = () => {
      return res.data.ScholarshipData
     }
   })
-  console.log(topScholarships)
   if(isLoading){
     return <span className="loading loading-ring loading-xl"></span>
 
