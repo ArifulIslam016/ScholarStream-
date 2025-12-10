@@ -3,6 +3,7 @@ import React from "react";
 import { useParams } from "react-router";
 import useAuthhooks from "../hooks/Authhooks";
 import useSecureInstance from "../hooks/SecureInstance";
+import usePaymentHooks from "../hooks/PaymentHooks";
 
 const DetailedScholarship = () => {
   const { user } = useAuthhooks();
@@ -17,6 +18,7 @@ const DetailedScholarship = () => {
     },
   });
   // console.log(scholarshipDetails)
+  const handlePayments=usePaymentHooks()
   return (
     <div>
       <div className="bg-base-200/60 py-10">
@@ -135,7 +137,7 @@ const DetailedScholarship = () => {
               </div>
 
               <div className="pt-2">
-                <button className="btn btn-primary w-full md:w-auto px-8 text-sm font-semibold tracking-wide">
+                <button onClick={()=>handlePayments(scholarshipDetails)} className="btn btn-primary w-full md:w-auto px-8 text-sm font-semibold tracking-wide">
                   Apply for Scholarship
                 </button>
               </div>
