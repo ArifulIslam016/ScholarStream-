@@ -1,6 +1,7 @@
 import React from "react";
 import studentImg from "../../assets/StudentImg.png";
 import { easeOut, motion } from "motion/react";
+import { Link } from "react-router";
 const Banner = () => {
   return (
     <div className="w-full  bg-[#eafaf9] text-[#1d695e] pt-1 flex flex-col md:flex-row justify-between items-center">
@@ -18,9 +19,9 @@ const Banner = () => {
           education. Find the perfect scholarship and take the next step toward
           success.
         </p>
-        <button className="btn  bg-gradient-to-l from-[#16E2F5] to-[#1E90FF]">
+        <Link to={'/allscholarship'} className="btn  bg-gradient-to-l from-[#16E2F5] to-[#1E90FF]">
           Find Scholarship
-        </button>
+        </Link>
       </motion.div>
       <motion.img initial={{scale:0.8,opacity:0}} whileInView={{scale:1,opacity:1}} transition={{duration:1,delay:0.2,ease:easeOut}} className="max-w-[400px]" src={studentImg} alt="" />
     </div>

@@ -6,9 +6,10 @@ import Register from "../Pages/AuthenticationPages/Register";
 import RootLayout from "../Layouts/RootLayout";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
-import AddScholarship from "../DashboardPages/AddScholarship";
 import AllScholarship from "../Pages/AllScholarship";
 import Myprofile from "../DashboardPages/Myprofile";
+import AddScholarship from "../DashboardPages/AdminDashboard/AddScholarship";
+import DetailedScholarship from "../Pages/DetailedScholarship";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
         path: "/allscholarship",
         Component: AllScholarship,
       },
+      {
+        path: "/scholarship/:id",
+        element: (
+          <PrivateRoute>
+            <DetailedScholarship></DetailedScholarship>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -43,9 +52,12 @@ const router = createBrowserRouter([
     children: [
       { path: "addScholarship", element: <AddScholarship></AddScholarship> },
       {
-        path:'my-profile',
-        Component:Myprofile
-      }
+        path: "my-profile",
+        Component: Myprofile,
+      },
+      {
+        path: "mangeScholarships",
+      },
     ],
   },
 ]);

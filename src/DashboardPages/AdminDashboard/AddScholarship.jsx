@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import useAuthhooks from "../hooks/Authhooks";
+import useAuthhooks from "../../hooks/Authhooks";
 import axios from "axios";
-import useSecureInstance from "../hooks/SecureInstance";
+import useSecureInstance from "../../hooks/SecureInstance";
 import Swal from "sweetalert2";
 
 const AddScholarship = () => {

@@ -15,7 +15,7 @@ const TopScholarship = () => {
     }
   })
   if(isLoading){
-    return <span className="loading loading-ring loading-xl"></span>
+    return <div className="flex justify-center items-center mt-10"><span className=" text-center loading loading-ring loading-xl"></span></div>
 
   }
   return (
