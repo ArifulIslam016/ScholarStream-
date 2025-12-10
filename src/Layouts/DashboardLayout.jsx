@@ -4,6 +4,7 @@ import useAuthhooks from "../hooks/Authhooks";
 import useUserRoleHooks from "../hooks/UserRoleHooks";
 import logoImg from "../assets/SchorarStream Logo.png";
 import { IoIosSchool } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 const DashboardLayout = () => {
   const { user } = useAuthhooks();
   const { role } = useUserRoleHooks();
@@ -90,6 +91,18 @@ const DashboardLayout = () => {
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
                 <span className="is-drawer-close:hidden">Dashboard Home</span>
+              </Link>
+            </li>
+            <li
+              className="max-w-20 is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+              data-tip="Home"
+            >
+              <Link to={"/dashboard/my-profile"} data-tip="My Profile">
+                <span className="text-xl">
+                  {" "}
+                  <CgProfile />
+                </span>
+                <span className="is-drawer-close:hidden">My Profile</span>
               </Link>
             </li>
             {role === "admin" && (
