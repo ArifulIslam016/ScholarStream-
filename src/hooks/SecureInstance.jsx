@@ -10,7 +10,7 @@ const useSecureInstance =() => {
     const {user,logOut}=useAuthhooks();
   useEffect(()=>{
     const requestIncerceptor=  secureInstance.interceptors.request.use((config)=>{
-          config.headers.Authorization= `Bearer ${user.accessToken}`
+          config.headers.Authorization= `Bearer ${user?.accessToken}`
         return config
     })
     const responseInterceptor=secureInstance.interceptors.response.use((res)=>{
