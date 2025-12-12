@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import useSecureInstance from "../hooks/SecureInstance";
-import { div } from "motion/react-client";
+// import { div } from "motion/react-client";
 import LoadingPage from "./LoadingPage/LoadingPage";
 
 const PaymentSuccess = () => {
@@ -21,11 +21,10 @@ const PaymentSuccess = () => {
   if(loading){
     return <LoadingPage></LoadingPage>
   }
-  console.log(paymnetInfo);
   return (
     <div className="w-11/12 my-10 space-y-3 text-center">
       <h1 className="title text-3xl font-bold">Thanks for you payment</h1>
-     <div className="flex justify-center items-center gap-5 w-fit flex-wrap mx-auto rounded-3xl bg-gray-400 p-10">
+     <div className="flex justify-center items-center gap-5 w-fit flex-wrap mx-auto rounded-3xl bg-gray-300 p-10">
        <p className="badge badge-primary p-3">
         Paid Amount:
         {paymnetInfo ? (
@@ -34,15 +33,19 @@ const PaymentSuccess = () => {
           <span className="loading loading-spinner loading-xs"></span>
         )}
       </p>
-      <p className="btn md:p-0 w-full md:w-fit text-center">
-        Transition Id:
-        {paymnetInfo ? (
+      <p className="p-4 text-gray-800 text-sm md:text:lg md:p-0 w-full md:w-fit text-center">
+        Transition Id: {' '}
+         {paymnetInfo ? (
           paymnetInfo.payment_intent
         ) : (
           <span className="loading loading-spinner loading-xs"></span>
         )}
       </p>
      </div>
+     <div>
+      <h1 className="italic">You succesfully apllied for{paymnetInfo.metadata.scholarshipName} of {paymnetInfo.metadata.universityName}</h1>
+     </div>
+     <Link className="btn">Go to My apllication</Link>
     </div>
   );
 };
