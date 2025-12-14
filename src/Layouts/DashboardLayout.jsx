@@ -5,6 +5,7 @@ import useUserRoleHooks from "../hooks/UserRoleHooks";
 import logoImg from "../assets/SchorarStream Logo.png";
 import { IoIosSchool } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import { LiaListSolid } from "react-icons/lia";
 const DashboardLayout = () => {
   const { user } = useAuthhooks();
   const { role } = useUserRoleHooks();
@@ -105,6 +106,19 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">My Profile</span>
               </Link>
             </li>
+            <li
+              className="max-w-20 is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+              data-tip="Home"
+            >
+              <Link to={"/dashboard/myapplications"} data-tip="My Profile">
+                <span className="text-xl">
+                  {" "}
+                  <LiaListSolid />
+                </span>
+                <span className="is-drawer-close:hidden">My Applications</span>
+              </Link>
+            </li>
+            {/* Admin only route */}
             {role === "admin" && (
               <li>
                 <Link

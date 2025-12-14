@@ -12,6 +12,8 @@ import AddScholarship from "../DashboardPages/AdminDashboard/AddScholarship";
 import DetailedScholarship from "../Pages/DetailedScholarship";
 import PaymentSuccess from "../Pages/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail";
+import AdminRoute from "./AdminRoute";
+import MyApllications from "../DashboardPages/StudentDashboard/MyApllications";
 
 const router = createBrowserRouter([
   {
@@ -58,14 +60,18 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "addScholarship", element: <AddScholarship></AddScholarship> },
+      { path: "addScholarship",
+         element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute> },
       {
         path: "my-profile",
         Component: Myprofile,
       },
       {
         path: "mangeScholarships",
-      },
+      },{
+       path:"myapplications",
+       element:<MyApllications></MyApllications>
+      }
     ],
   },
 ]);
