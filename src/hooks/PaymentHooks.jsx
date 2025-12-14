@@ -21,6 +21,10 @@ const usePaymentHooks = () => {
       degrees: scholarship.degree,
       scholarshipCategory: scholarship.scholarshipCategory,
       applicationStatus: "pending",
+      universityCity:scholarship.universityCity,
+      universityCountry:scholarship.universityCountry,
+      feedback:'Not yet provided',
+      subjectCatagory:scholarship.subjectCategory,
     };
     try {
       const res = await Instance.post(

@@ -94,11 +94,12 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Dashboard Home</span>
               </Link>
             </li>
-            <li
-              className="max-w-20 is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
-              data-tip="Home"
-            >
-              <Link to={"/dashboard/my-profile"} data-tip="My Profile">
+            <li>
+              <Link
+                className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                to={"/dashboard/my-profile"}
+                data-tip="My Profile"
+              >
                 <span className="text-xl">
                   {" "}
                   <CgProfile />
@@ -106,13 +107,12 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">My Profile</span>
               </Link>
             </li>
-            <li
-             
-            
-            >
-              <Link to={"/dashboard/myapplications"}
-               className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
-              data-tip="My Applications">
+            <li>
+              <Link
+                to={"/dashboard/myapplications"}
+                className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                data-tip="My Applications"
+              >
                 <span className="text-xl">
                   {" "}
                   <LiaListSolid />
