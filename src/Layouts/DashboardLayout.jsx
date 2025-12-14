@@ -107,15 +107,17 @@ const DashboardLayout = () => {
               </Link>
             </li>
             <li
-              className="max-w-20 is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
-              data-tip="Home"
+             
+            
             >
-              <Link to={"/dashboard/myapplications"} data-tip="My Profile">
+              <Link to={"/dashboard/myapplications"}
+               className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+              data-tip="My Applications">
                 <span className="text-xl">
                   {" "}
                   <LiaListSolid />
                 </span>
-                <span className="is-drawer-close:hidden">My Applications</span>
+                <span className="is-drawer-close:hidden">My Apllications </span>
               </Link>
             </li>
             {/* Admin only route */}

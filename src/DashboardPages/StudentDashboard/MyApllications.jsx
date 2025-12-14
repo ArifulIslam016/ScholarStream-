@@ -16,7 +16,7 @@ const MyApllications = () => {
     console.log(applicationsData)
     return (
         <div>
-            <h1>This is my applicaltion section</h1>
+            {/* <h1 className='text-xl title font-medium'>Total {applicationsData.length} application found</h1> */}
         </div>
     );
 };
