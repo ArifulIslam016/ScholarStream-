@@ -19,9 +19,14 @@ const MyApllications = () => {
       return res.data;
     },
   });
+
   if (isLoading) {
     return <LoadingPage></LoadingPage>;
   }
+const handlePaymentFormMyApplicationPage=async(applicationdata)=>{
+const scholarshipInfo=await Instance.get(`/scholarship/${applicationdata.scholarshipId}`)
+handlePayments(scholarshipInfo.data)
+}
   console.log(applicationsData);
   return (
     <div>
@@ -87,7 +92,7 @@ const MyApllications = () => {
                     )}
                     {data.paymentStatus === "unpaid" &&
                       data.applicationStatus === "pending" && (
-                        <button onClick={()=>handlePayments(data)} className="btn btn-primary hover:tooltip  tooltip-primary">
+                        <button onClick={()=>handlePaymentFormMyApplicationPage(data)} className="btn btn-primary hover:tooltip  tooltip-primary">
                           Pay
                         </button>
                       )}
