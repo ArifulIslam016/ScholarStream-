@@ -14,6 +14,8 @@ import PaymentSuccess from "../Pages/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail";
 import AdminRoute from "./AdminRoute";
 import MyApllications from "../DashboardPages/StudentDashboard/MyApllications";
+import ModaratorRoute from "./ModaratorRoute";
+import ManageApplications from "../DashboardPages/ModeratorDashboard/ManageApplications";
 
 const router = createBrowserRouter([
   {
@@ -35,12 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/allscholarship",
         Component: AllScholarship,
-      },{
-        path:'/payment-success',
-        Component:PaymentSuccess
-      },{
-        path:'/payment-cancel',
-        Component:PaymentFail
+      },
+      {
+        path: "/payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "/payment-cancel",
+        Component: PaymentFail,
       },
       {
         path: "/scholarship/:id",
@@ -60,18 +64,33 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "addScholarship",
-         element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute> },
+      {
+        path: "addScholarship",
+        element: (
+          <AdminRoute>
+            <AddScholarship></AddScholarship>
+          </AdminRoute>
+        ),
+      },
       {
         path: "my-profile",
         Component: Myprofile,
       },
       {
         path: "mangeScholarships",
-      },{
-       path:"myapplications",
-       element:<MyApllications></MyApllications>
-      }
+      },
+      {
+        path: "myapplications",
+        element: <MyApllications></MyApllications>,
+      },
+      {
+        path: "manageapplications",
+        element: (
+          <ModaratorRoute>
+            <ManageApplications></ManageApplications>
+          </ModaratorRoute>
+        ),
+      },
     ],
   },
 ]);

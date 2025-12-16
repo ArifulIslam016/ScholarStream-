@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
-import useAuthhooks from "../hooks/Authhooks";
 import useUserRoleHooks from "../hooks/UserRoleHooks";
 import logoImg from "../assets/SchorarStream Logo.png";
 import { IoIosSchool } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { LiaListSolid } from "react-icons/lia";
+import { MdManageSearch } from "react-icons/md";
 const DashboardLayout = () => {
-  const { user } = useAuthhooks();
   const { role } = useUserRoleHooks();
   return (
     <div className="drawer lg:drawer-open md:w-11/12 mx-auto">
@@ -37,7 +36,7 @@ const DashboardLayout = () => {
             </svg>
           </label>
           <div className="px-4 text-white font-extrabold text-4xl">
-            {role === "modaretor" ? (
+            {role === "moderator" ? (
               <h1>Modaretor Dashboard</h1>
             ) : role === "admin" ? (
               <h1>Admin Dashboard</h1>
@@ -59,7 +58,7 @@ const DashboardLayout = () => {
           className="drawer-overlay"
         ></label>
         <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-          {/* Sidebar content here */}
+          {/* Sidebar contents here */}
           <ul className="menu w-full grow">
             {/* List item */}
             <li
@@ -70,6 +69,7 @@ const DashboardLayout = () => {
                 <img src={logoImg} alt="" />
               </Link>
             </li>
+            {/* Dashboar Home */}
             <li>
               <Link
                 to={"/dashboard"}
@@ -93,6 +93,7 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Dashboard Home</span>
               </Link>
             </li>
+            {/* My profile route */}
             <li>
               <Link
                 className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
@@ -106,20 +107,29 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">My Profile</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to={"/dashboard/myapplications"}
-                className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
-                data-tip="My Applications"
-              >
-                <span className="text-xl">
-                  {" "}
-                  <LiaListSolid />
-                </span>
-                <span className="is-drawer-close:hidden">My Apllications </span>
-              </Link>
-            </li>
-            {/* Admin only route */}
+
+            {/* student Only route */}
+            {role === "student" && (
+              <>
+                {/* My application Route here */}
+                <li>
+                  <Link
+                    to={"/dashboard/myapplications"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="My Applications"
+                  >
+                    <span className="text-xl">
+                      {" "}
+                      <LiaListSolid />
+                    </span>
+                    <span className="is-drawer-close:hidden">
+                      My Apllications{" "}
+                    </span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {/* Admin only routes */}
             {role === "admin" && (
               <li>
                 <Link
@@ -137,8 +147,27 @@ const DashboardLayout = () => {
                 </Link>
               </li>
             )}
+            {/* Moderator Only Routes */}
+            {role === "moderator" && (
+              <>
+              {/* manage Application Route here */}
+                <li>
+                  <Link
+                    to={"/dashboard/manageapplications"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="Manage Applications"
+                  >
+                    <span className="text-xl">
+                      <MdManageSearch />
+                    </span>
 
-            {/* List item */}
+                    <span className="is-drawer-close:hidden">
+                      Manage Applications{" "}
+                    </span>
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
               <button
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
