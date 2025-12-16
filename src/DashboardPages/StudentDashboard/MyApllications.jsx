@@ -144,12 +144,16 @@ const MyApllications = () => {
                       <span className="text-yellow-400 italic">
                         {data.applicationStatus}
                       </span>
-                    ) : data?.applicationStatus === "rejected" ? (
+                    ) : data?.applicationStatus === "Rejected" ? (
                       <span className="text-red-400 italic">
                         {data.applicationStatus}
                       </span>
+                    ) : data?.applicationStatus === "Processing" ? (
+                      <span className="text-blue-400 italic">
+                        {data.applicationStatus}
+                      </span>
                     ) : (
-                      <span className="text-green-400-400 italic">
+                      <span className="text-green-400 italic">
                         {data.applicationStatus}
                       </span>
                     )}

@@ -11,6 +11,7 @@ const ManageApplications = () => {
   const Instance = useSecureInstance();
   const detailsModalRef = useRef();
   const feedBackModalRef = useRef();
+  const dropDownRef = useRef();
   const [detailsModal, setDetailsModal] = useState({});
   const [feedbackscholarship, setFeedbackscholarship] = useState({});
   const {
@@ -31,31 +32,47 @@ const ManageApplications = () => {
     setDetailsModal(applicationData);
     detailsModalRef.current.showModal();
   };
-  const handleApplicationFeedback=(selectedApplications)=>{
-    feedBackModalRef.current.showModal()
-    setFeedbackscholarship(selectedApplications)
-  }
-  const handleFeedBack=async(e)=>{
-    e.preventDefault()
-   const res=await Instance.patch(`/applications/${feedbackscholarship._id}/feedback`,{feedback:e.target.feedback.value})
-   console.log(res)
-   if(res.data.modifiedCount){
-    refetch()
-    feedBackModalRef.current.close()
-    Swal.fire({
-  title: "Feedback Send",
-  icon: "success",
-  draggable: true
-});
+  const handleApplicationFeedback = (selectedApplications) => {
+    feedBackModalRef.current.showModal();
+    setFeedbackscholarship(selectedApplications);
+  };
+  const handleFeedBack = async (e) => {
+    e.preventDefault();
+    const res = await Instance.patch(
+      `/applications/${feedbackscholarship._id}/feedback`,
+      { feedback: e.target.feedback.value }
+    );
 
-   }
-  }
+    if (res.data.modifiedCount) {
+      refetch();
+      feedBackModalRef.current.close();
+      Swal.fire({
+        title: "Feedback Send",
+        icon: "success",
+        draggable: true,
+      });
+    }
+  };
+  const handleApplicationStatus = async (status, applicationId) => {
+    const res =await Instance.patch(
+      `/applications/${applicationId}/applicationStatus`,
+      { status }
+    );
+    if (res.data.modifiedCount) {
+      refetch()
+      Swal.fire({
+        title: "Status updated",
+        icon: "success",
+        draggable: true,
+      });
+    }
+  };
   return (
     <div>
       <h1 className="title text-2xl font-semibold">
         Total {applications.length} application fount
       </h1>
-      <div className="overflow-x-auto">
+      <div ref={dropDownRef} className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
           <thead>
@@ -85,12 +102,16 @@ const ManageApplications = () => {
                       <span className="text-yellow-400 text-lg italic">
                         {data.applicationStatus}
                       </span>
-                    ) : data?.applicationStatus === "rejected" ? (
+                    ) : data?.applicationStatus === "Rejected" ? (
                       <span className="text-red-400 italic">
                         {data.applicationStatus}
                       </span>
+                    ) : data?.applicationStatus === "Processing" ? (
+                      <span className="text-blue-400 italic">
+                        {data.applicationStatus}
+                      </span>
                     ) : (
-                      <span className="text-green-400-400 italic">
+                      <span className="text-green-400 italic">
                         {data.applicationStatus}
                       </span>
                     )}
@@ -116,13 +137,13 @@ const ManageApplications = () => {
                       <BiDetail />
                     </button>
                     <button
-                    onClick={()=>handleApplicationFeedback(data)}
+                      onClick={() => handleApplicationFeedback(data)}
                       className="btn hover:tooltip bg-amber-100  tooltip-primary"
                       data-tip="Give Feedback"
                     >
                       <FcFeedback />
                     </button>
-                    <div className="dropdown">
+                    <div className="dropdown dropdown-center">
                       <button
                         tabIndex={20}
                         role="button"
@@ -132,17 +153,18 @@ const ManageApplications = () => {
                       </button>
                       <ul
                         tabIndex="-1"
-                        className="dropdown-content  menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                        className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 shadow-sm"
                       >
                         <li>
-                          <button className="btn">Proceesing</button>
+                          <button onClick={()=>handleApplicationStatus("Processing",data._id)} className="btn bg-amber-300">Proceesing</button>
                         </li>
                         <li>
-                          <button className="btn">Completed</button>
+                          <button onClick={()=>handleApplicationStatus("Completed",data._id)} className="btn bg-green-400">Completed</button>
                         </li>
                       </ul>
                     </div>
                     <button
+                    onClick={()=>handleApplicationStatus("Rejected",data._id)}
                       className="btn hover:tooltip bg-red-300 tooltip-primary"
                       data-tip="Reject"
                     >
@@ -224,20 +246,30 @@ const ManageApplications = () => {
         </div>
       </dialog>
       {/* FeedBack modal */}
-<dialog ref={feedBackModalRef} className="modal">
-  <div className="modal-box">
-                <form className="flex flex-col gap-2" onSubmit={handleFeedBack}>
-                    <textarea type="text" className="textarea w-full" placeholder="Your message here..." name="feedback"/>
-                    <button className="btn bg-linear-to-l text-white  from-[#16E2F5] to-[#1E90FF]" type="submit">Submit</button>
-                </form>
-    <div className="modal-action">
-      <form method="dialog">
-        {/* if there is a button in form, it will close the modal */}
-        <button className="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
+      <dialog ref={feedBackModalRef} className="modal">
+        <div className="modal-box">
+          <form className="flex flex-col gap-2" onSubmit={handleFeedBack}>
+            <textarea
+              type="text"
+              className="textarea w-full"
+              placeholder="Your message here..."
+              name="feedback"
+            />
+            <button
+              className="btn bg-linear-to-l text-white  from-[#16E2F5] to-[#1E90FF]"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
