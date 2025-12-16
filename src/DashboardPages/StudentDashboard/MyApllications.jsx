@@ -157,7 +157,7 @@ const MyApllications = () => {
                   <td className="flex gap-1">
                     <button
                       onClick={() => handleDetailsModal(data)}
-                      className="btn hover:tooltip  tooltip-primary"
+                      className="btn hover:tooltip bg-gray-300 tooltip-primary"
                       data-tip="Details"
                     >
                       <BiDetail />
@@ -165,7 +165,7 @@ const MyApllications = () => {
                     {data.applicationStatus === "pending" && (
                       <button
                         onClick={() => handleEditModal(data)}
-                        className="btn hover:tooltip  tooltip-primary"
+                        className="btn hover:tooltip bg-amber-100 tooltip-primary"
                         data-tip="Edit"
                       >
                         <FaRegEdit />
