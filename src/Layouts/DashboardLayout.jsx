@@ -9,7 +9,6 @@ import { LiaListSolid } from "react-icons/lia";
 const DashboardLayout = () => {
   const { user } = useAuthhooks();
   const { role } = useUserRoleHooks();
-  console.log(role);
   return (
     <div className="drawer lg:drawer-open md:w-11/12 mx-auto">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />

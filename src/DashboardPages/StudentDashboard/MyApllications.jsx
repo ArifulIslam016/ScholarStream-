@@ -79,7 +79,34 @@ const MyApllications = () => {
       }
     });
   };
-  console.log(detailsModal);
+  const handleEditApplication = async (e) => {
+    e.preventDefault()
+    editModalRef.current.close()
+    console.log(e.target.email)
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await Instance.patch(
+          `/apllications/${editsModal._id}`,
+          {
+            email:e.target.email.value,
+          }
+        );
+        console.log(response)
+        if (response.data.modifiedCount) {
+          Swal.fire("Saved!", "", "success");
+        }
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved");
+      }
+    });
+  };
+  console.log(editsModal);
   return (
     <div>
       <h1 className="text-xl title font-medium">
@@ -179,7 +206,7 @@ const MyApllications = () => {
           </tbody>
         </table>
       </div>
-      {/* details modal */}
+      {/* details modal here  */}
       <dialog
         ref={detailsModalRef}
         className="modal modal-bottom sm:modal-middle"
@@ -245,10 +272,25 @@ const MyApllications = () => {
       {/* Edit modal */}
       <dialog ref={editModalRef} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
+          <form onSubmit={handleEditApplication} >
+            <fieldset className="fieldset">
+              <label className="label">Name</label>
+              <input
+                defaultValue={editsModal.userName}
+                type="text"
+                className="input"
+              />
+              <label className="label">Email (Not Editable)</label>
+              <input
+                value={editsModal.userEmail}
+                type="email"
+                className="input"
+                placeholder="Email"
+                name="email"
+              />
+              <input className="btn bg-linear-to-l from-[#16E2F5] to-[#1E90FF] w-full mt-5" type="submit" value={'Update'} />
+            </fieldset>
+          </form>
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
