@@ -5,11 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import { BiDetail } from "react-icons/bi";
 import { FcFeedback } from "react-icons/fc";
 import { TbMailCancel } from "react-icons/tb";
+import Swal from "sweetalert2";
 
 const ManageApplications = () => {
   const Instance = useSecureInstance();
   const detailsModalRef = useRef();
+  const feedBackModalRef = useRef();
   const [detailsModal, setDetailsModal] = useState({});
+  const [feedbackscholarship, setFeedbackscholarship] = useState({});
   const {
     data: applications = [],
     isLoading,
@@ -28,6 +31,25 @@ const ManageApplications = () => {
     setDetailsModal(applicationData);
     detailsModalRef.current.showModal();
   };
+  const handleApplicationFeedback=(selectedApplications)=>{
+    feedBackModalRef.current.showModal()
+    setFeedbackscholarship(selectedApplications)
+  }
+  const handleFeedBack=async(e)=>{
+    e.preventDefault()
+   const res=await Instance.patch(`/applications/${feedbackscholarship._id}/feedback`,{feedback:e.target.feedback.value})
+   console.log(res)
+   if(res.data.modifiedCount){
+    refetch()
+    feedBackModalRef.current.close()
+    Swal.fire({
+  title: "Feedback Send",
+  icon: "success",
+  draggable: true
+});
+
+   }
+  }
   return (
     <div>
       <h1 className="title text-2xl font-semibold">
@@ -94,6 +116,7 @@ const ManageApplications = () => {
                       <BiDetail />
                     </button>
                     <button
+                    onClick={()=>handleApplicationFeedback(data)}
                       className="btn hover:tooltip bg-amber-100  tooltip-primary"
                       data-tip="Give Feedback"
                     >
@@ -132,6 +155,7 @@ const ManageApplications = () => {
           </tbody>
         </table>
       </div>
+      {/* Details Modal */}
       <dialog
         ref={detailsModalRef}
         className="modal modal-bottom sm:modal-middle"
@@ -199,6 +223,21 @@ const ManageApplications = () => {
           </div>
         </div>
       </dialog>
+      {/* FeedBack modal */}
+<dialog ref={feedBackModalRef} className="modal">
+  <div className="modal-box">
+                <form className="flex flex-col gap-2" onSubmit={handleFeedBack}>
+                    <textarea type="text" className="textarea w-full" placeholder="Your message here..." name="feedback"/>
+                    <button className="btn bg-linear-to-l text-white  from-[#16E2F5] to-[#1E90FF]" type="submit">Submit</button>
+                </form>
+    <div className="modal-action">
+      <form method="dialog">
+        {/* if there is a button in form, it will close the modal */}
+        <button className="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
     </div>
   );
 };

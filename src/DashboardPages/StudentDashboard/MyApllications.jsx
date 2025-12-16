@@ -80,9 +80,9 @@ const MyApllications = () => {
     });
   };
   const handleEditApplication = async (e) => {
-    e.preventDefault()
-    editModalRef.current.close()
-    console.log(e.target.email)
+    e.preventDefault();
+    editModalRef.current.close();
+    console.log(e.target.email);
     Swal.fire({
       title: "Do you want to save the changes?",
       showDenyButton: true,
@@ -94,10 +94,10 @@ const MyApllications = () => {
         const response = await Instance.patch(
           `/apllications/${editsModal._id}`,
           {
-            email:e.target.email.value,
+            name: e.target.name.value,
           }
         );
-        console.log(response)
+        console.log(response);
         if (response.data.modifiedCount) {
           Swal.fire("Saved!", "", "success");
         }
@@ -272,13 +272,14 @@ const MyApllications = () => {
       {/* Edit modal */}
       <dialog ref={editModalRef} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <form onSubmit={handleEditApplication} >
+          <form onSubmit={handleEditApplication}>
             <fieldset className="fieldset">
               <label className="label">Name</label>
               <input
                 defaultValue={editsModal.userName}
                 type="text"
                 className="input"
+                name="name"
               />
               <label className="label">Email (Not Editable)</label>
               <input
@@ -286,9 +287,12 @@ const MyApllications = () => {
                 type="email"
                 className="input"
                 placeholder="Email"
-                name="email"
               />
-              <input className="btn bg-linear-to-l from-[#16E2F5] to-[#1E90FF] w-full mt-5" type="submit" value={'Update'} />
+              <input
+                className="btn bg-linear-to-l from-[#16E2F5] to-[#1E90FF] w-full mt-5"
+                type="submit"
+                value={"Update"}
+              />
             </fieldset>
           </form>
           <div className="modal-action">
