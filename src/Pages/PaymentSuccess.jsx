@@ -45,7 +45,7 @@ const PaymentSuccess = () => {
      <div>
       <h1 className="italic">You succesfully apllied for{paymnetInfo.metadata.scholarshipName} of {paymnetInfo.metadata.universityName}</h1>
      </div>
-     <Link className="btn">Go to My apllication</Link>
+     <Link to={'/dashboard/myapplications'} className="btn bg-linear-to-l from-[#16E2F5] to-[#1E90FF]">Go to My apllication</Link>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { BiDetail } from "react-icons/bi";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete, MdRateReview } from "react-icons/md";
 import usePaymentHooks from "../../hooks/PaymentHooks";
+import Swal from "sweetalert2";
 
 const MyApllications = () => {
   const detailsModalRef = useRef();
@@ -16,7 +17,11 @@ const MyApllications = () => {
   const [editsModal, seteEdiMsodal] = useState({});
   const Instance = useSecureInstance();
   const handlePayments = usePaymentHooks();
-  const { data: applicationsData, isLoading } = useQuery({
+  const {
+    data: applicationsData,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["applications", user],
     queryFn: async () => {
       const res = await Instance.get(`/applications?email=${user.email}`);
@@ -40,6 +45,39 @@ const MyApllications = () => {
   const handleEditModal = (applicationData) => {
     seteEdiMsodal(applicationData);
     editModalRef.current.showModal();
+  };
+  const hanldeDeleteApplication = (selectedApplication) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Instance.delete(`/apllications/${selectedApplication._id}`)
+          .then((res) => {
+            console.log(res);
+            if (res.data.deletedCount) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your apllication has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              title: "Something gone wrong!",
+              text: "Your apllication not deleted.",
+              icon: "error",
+            });
+          });
+      }
+    });
   };
   console.log(detailsModal);
   return (
@@ -119,6 +157,7 @@ const MyApllications = () => {
                       )}
                     {data.applicationStatus === "pending" && (
                       <button
+                        onClick={() => hanldeDeleteApplication(data)}
                         className="btn hover:tooltip text-red-400 tooltip-primary"
                         data-tip="Delete Application"
                       >
