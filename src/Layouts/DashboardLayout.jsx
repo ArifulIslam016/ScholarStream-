@@ -6,6 +6,7 @@ import { IoIosSchool } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { LiaListSolid } from "react-icons/lia";
 import { MdManageSearch, MdRateReview } from "react-icons/md";
+import { FaAllergies } from "react-icons/fa";
 const DashboardLayout = () => {
   const { role } = useUserRoleHooks();
   return (
@@ -175,6 +176,22 @@ const DashboardLayout = () => {
                   >
                     <span className="text-xl">
                       <MdManageSearch />
+                    </span>
+
+                    <span className="is-drawer-close:hidden">
+                      Manage Applications{" "}
+                    </span>
+                  </Link>
+                </li>
+              {/* manage All Reviews Route here */}
+                <li>
+                  <Link
+                    to={"/dashboard/allreviews"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="All Reviews"
+                  >
+                    <span className="text-xl">
+                      <FaAllergies />
                     </span>
 
                     <span className="is-drawer-close:hidden">

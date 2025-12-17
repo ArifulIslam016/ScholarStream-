@@ -17,6 +17,7 @@ import MyApllications from "../DashboardPages/StudentDashboard/MyApllications";
 import ModaratorRoute from "./ModaratorRoute";
 import ManageApplications from "../DashboardPages/ModeratorDashboard/ManageApplications";
 import MyReview from "../DashboardPages/StudentDashboard/MyReview";
+import AllReviews from "../DashboardPages/ModeratorDashboard/AllReviews";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,11 @@ const router = createBrowserRouter([
       },{
         path:'myreviews',
         element:<MyReview></MyReview>
+      },{
+        path:'allreviews',
+        element:<ModaratorRoute>
+          <AllReviews></AllReviews>
+        </ModaratorRoute>
       }
     ],
   },
