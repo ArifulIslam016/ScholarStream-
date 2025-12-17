@@ -4,18 +4,23 @@ import { useQuery } from "@tanstack/react-query";
 import useSecureInstance from "../../hooks/SecureInstance";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import { BiDetail } from "react-icons/bi";
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaStar } from "react-icons/fa";
 import { MdDelete, MdRateReview } from "react-icons/md";
 import usePaymentHooks from "../../hooks/PaymentHooks";
 import Swal from "sweetalert2";
+import { CiStar } from "react-icons/ci";
 
 const MyApllications = () => {
   const detailsModalRef = useRef();
   const editModalRef = useRef();
+  const reviewModalRef = useRef();
   const { user } = useAuthhooks();
   const [detailsModal, setDetailsModal] = useState({});
   const [editsModal, seteEdiMsodal] = useState({});
+  const [reviewedScholarship, setRviewScholarship] = useState({});
+  const [rateStarNo, setRateStarNo] = useState(0);
   const Instance = useSecureInstance();
+  const ratingArray = [1, 2, 3, 4, 5];
   const handlePayments = usePaymentHooks();
   const {
     data: applicationsData,
@@ -106,7 +111,45 @@ const MyApllications = () => {
       }
     });
   };
-  console.log(editsModal);
+  const hanleReview = async (e) => {
+    e.preventDefault();
+    const reviewInfo = {
+      scholarshipName: reviewedScholarship.scholarshipName,
+      scholarshipId: reviewedScholarship.scholarshipId,
+      appplicationId: reviewedScholarship._id,
+      universityCity: reviewedScholarship.universityCity,
+      universityCountry: reviewedScholarship.universityCountry,
+      universityName: reviewedScholarship.universityCountry,
+      //   userEmail:reviewedScholarship.universityCountry,
+      reviewerEmail: user.email,
+      reviewerImage: user.photoURL,
+      reviewerName: user.displayName,
+      reviewComment: e.target.reviewCommnet.value,
+      reviewStar: parseInt(rateStarNo),
+    };
+    console.log(reviewInfo);
+    const res = await Instance.post("/reviews", reviewInfo).catch((err) => {
+      if (err.status === 400) {
+        reviewModalRef.current.close()
+        setRateStarNo(0)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.response.data.message}`,
+        });
+      }
+    });
+    console.log(res);
+    if (res.data.insertedId) {
+      Swal.fire({
+        title: "Thank you!",
+        text: "Your feedback will inspire us!",
+        icon: "success",
+      });
+      setRateStarNo(0);
+      reviewModalRef.current.close();
+    }
+  };
   return (
     <div>
       <h1 className="text-xl title font-medium">
@@ -195,9 +238,13 @@ const MyApllications = () => {
                         <MdDelete />
                       </button>
                     )}
-                    {data.applicationStatus === "completed" && (
+                    {data.applicationStatus === "Completed" && (
                       <button
-                        className="btn hover:tooltip text-red-400 tooltip-primary"
+                        onClick={() => {
+                          setRviewScholarship(data);
+                          reviewModalRef.current.showModal();
+                        }}
+                        className="btn hover:tooltip text-green-400 tooltip-primary"
                         data-tip="Add review"
                       >
                         <MdRateReview />
@@ -298,6 +345,45 @@ const MyApllications = () => {
                 value={"Update"}
               />
             </fieldset>
+          </form>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+      {/* Details Modal */}
+      <dialog ref={reviewModalRef} className="modal">
+        <div className="modal-box">
+          <form onSubmit={hanleReview} className="flex flex-col gap-2">
+            <div className="flex gap-2 items-center">
+              <h1 className="text-xl "> Rate:</h1>
+              {ratingArray.map((rateNo) => (
+                <span
+                  key={rateNo}
+                  onClick={() => setRateStarNo(rateNo)}
+                  className="text-yellow-300"
+                >
+                  {rateStarNo >= rateNo ? <FaStar /> : <CiStar />}
+                </span>
+              ))}
+            </div>
+            <textarea
+              required={true}
+              type="text"
+              className="textarea w-full"
+              placeholder="Your message here..."
+              name="reviewCommnet"
+              defaultValue=''
+            />
+            <button
+              className="btn bg-linear-to-l text-white  from-[#16E2F5] to-[#1E90FF]"
+              type="submit"
+            >
+              Submit
+            </button>
           </form>
           <div className="modal-action">
             <form method="dialog">

@@ -34,7 +34,6 @@ const usePaymentHooks = () => {
       console.log(res);
       window.location.assign(res.data.url);
     } catch (err) {
-      console.log(err);
       if (err.status === 400) {
         Swal.fire({
           icon: "error",
