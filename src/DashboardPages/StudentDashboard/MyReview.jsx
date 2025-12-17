@@ -1,27 +1,35 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import useSecureInstance from "../../hooks/SecureInstance";
 import { useQuery } from "@tanstack/react-query";
 import useAuthhooks from "../../hooks/Authhooks";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaStar } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { CiStar } from "react-icons/ci";
 
 const MyReview = () => {
   const Instance = useSecureInstance();
-  const { user, userLoading } = useAuthhooks();
-  if (userLoading) {
-    return <LoadingPage></LoadingPage>;
-  }
-  const { data: reviews = [],refetch:reviewRefetch } = useQuery({
-    queryKey: ["reviews", user.email],
+  const { user } = useAuthhooks();
+  const [rateStarNo, setRateStarNo] = useState(0);
+  const [selectedReview, setselectedReview] = useState({});
+  const ratingArray = [1, 2, 3, 4, 5];
+  const EditingReviewModalRef = useRef();
+  //   if (userLoading) {
+  //     return <LoadingPage></LoadingPage>;
+  //   }
+  const { data: reviews = [], refetch: reviewRefetch } = useQuery({
+    queryKey: ["reviews", user?.email],
     queryFn: async () => {
       const res = await Instance.get(`/reviews?email=${user.email}`);
       //   console.log(res.data);
       return res.data;
     },
   });
-  const handleEditModal = async () => {};
+  const handleEditModal = async (review) => {
+    setselectedReview(review);
+    EditingReviewModalRef.current.showModal();
+  };
   const hanldeDeleteReview = async (review) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -45,7 +53,7 @@ const MyReview = () => {
           const res = await Instance.delete(`/reviews/${review._id}`);
           console.log(res.data);
           if (res.data.deletedCount) {
-            reviewRefetch()
+            reviewRefetch();
             swalWithBootstrapButtons.fire({
               title: "Deleted!",
               text: "Your Review has been deleted.",
@@ -63,6 +71,26 @@ const MyReview = () => {
           });
         }
       });
+  };
+  const handleEditReview = async (e) => {
+    e.preventDefault();
+    const updatedInfo = {
+      reviewStar: rateStarNo,
+      reviewComment: e.target.updatedReviewCommnet.value,
+    };
+    const res = await Instance.patch(`/reviews/${selectedReview._id}/edit`,updatedInfo);
+    console.log(res);
+    if (res.data.modifiedCount) {
+        reviewRefetch()
+      Swal.fire({
+        title: "Thank you!",
+        text: "Your feedback will inspire us!",
+        icon: "success",
+      });
+      setRateStarNo(0);
+      setselectedReview({})
+      EditingReviewModalRef.current.close();
+    }
   };
   return (
     <div>
@@ -118,6 +146,45 @@ const MyReview = () => {
           </tbody>
         </table>
       </div>
+      {/* Review edit Modal */}
+      <dialog ref={EditingReviewModalRef} className="modal">
+        <div className="modal-box">
+          <form onSubmit={handleEditReview} className="flex flex-col gap-2">
+            <div className="flex gap-2 items-center">
+              <h1 className="text-xl "> Rate:</h1>
+              {ratingArray.map((rateNo) => (
+                <span
+                  key={rateNo}
+                  onClick={() => setRateStarNo(rateNo)}
+                  className="text-yellow-300"
+                >
+                  {rateStarNo >= rateNo ? <FaStar /> : <CiStar />}
+                </span>
+              ))}
+            </div>
+            <textarea
+            // defaultValue={selectedReview.reviewComment}
+              required={true}
+              type="text"
+              className="textarea w-full"
+              placeholder="Your message here..."
+              name="updatedReviewCommnet"
+            />
+            <button
+              className="btn bg-linear-to-l text-white  from-[#16E2F5] to-[#1E90FF]"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

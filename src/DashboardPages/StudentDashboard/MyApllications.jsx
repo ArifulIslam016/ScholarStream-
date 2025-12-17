@@ -356,7 +356,7 @@ const MyApllications = () => {
           </div>
         </div>
       </dialog>
-      {/* Details Modal */}
+      {/* Review Modal */}
       <dialog ref={reviewModalRef} className="modal">
         <div className="modal-box">
           <form onSubmit={hanleReview} className="flex flex-col gap-2">
