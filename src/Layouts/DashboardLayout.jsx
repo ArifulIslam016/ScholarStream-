@@ -5,7 +5,7 @@ import logoImg from "../assets/SchorarStream Logo.png";
 import { IoIosSchool } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { LiaListSolid } from "react-icons/lia";
-import { MdManageSearch } from "react-icons/md";
+import { MdManageSearch, MdRateReview } from "react-icons/md";
 const DashboardLayout = () => {
   const { role } = useUserRoleHooks();
   return (
@@ -124,6 +124,22 @@ const DashboardLayout = () => {
                     </span>
                     <span className="is-drawer-close:hidden">
                       My Apllications{" "}
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/dashboard/myreviews"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="My Reviews"
+                  >
+                    <span className="text-xl">
+                      {" "}
+                    <MdRateReview />
+
+                    </span>
+                    <span className="is-drawer-close:hidden">
+                      My Reviews{" "}
                     </span>
                   </Link>
                 </li>

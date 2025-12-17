@@ -119,7 +119,7 @@ const MyApllications = () => {
       appplicationId: reviewedScholarship._id,
       universityCity: reviewedScholarship.universityCity,
       universityCountry: reviewedScholarship.universityCountry,
-      universityName: reviewedScholarship.universityCountry,
+      universityName: reviewedScholarship.universityName,
       //   userEmail:reviewedScholarship.universityCountry,
       reviewerEmail: user.email,
       reviewerImage: user.photoURL,
@@ -130,8 +130,8 @@ const MyApllications = () => {
     console.log(reviewInfo);
     const res = await Instance.post("/reviews", reviewInfo).catch((err) => {
       if (err.status === 400) {
-        reviewModalRef.current.close()
-        setRateStarNo(0)
+        reviewModalRef.current.close();
+        setRateStarNo(0);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -201,7 +201,9 @@ const MyApllications = () => {
                       </span>
                     )}
                   </td>
-                  <td className="flex gap-1">
+                  <td
+                    className="flex gap-1"
+                    tabIndex='-1'>
                     <button
                       onClick={() => handleDetailsModal(data)}
                       className="btn hover:tooltip bg-gray-300 tooltip-primary"
@@ -376,7 +378,7 @@ const MyApllications = () => {
               className="textarea w-full"
               placeholder="Your message here..."
               name="reviewCommnet"
-              defaultValue=''
+              defaultValue=""
             />
             <button
               className="btn bg-linear-to-l text-white  from-[#16E2F5] to-[#1E90FF]"
