@@ -152,6 +152,7 @@ const MangeScholarship = () => {
           </tbody>
         </table>
       </div>
+      {/* Update scholarship modal here */}
       <dialog ref={editScholarshipModalref} className="modal">
         <div className="modal-box">
           <div>
