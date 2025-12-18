@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaRegEdit, FaTrash } from "react-icons/fa";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const MangeScholarship = () => {
   const Instance = useSecureInstance();
@@ -17,7 +18,11 @@ const MangeScholarship = () => {
 
   const editScholarshipModalref = useRef();
   const [selectedScholarship, setSelectedScholarship] = useState({});
-  const { data: allscholarships = [], isLoading } = useQuery({
+  const {
+    data: allscholarships = [],
+    isLoading,
+    refetch: allScholarshipRefetch,
+  } = useQuery({
     queryKey: ["allScholarships"],
     queryFn: async () => {
       const res = await Instance.get("/scholarships");
@@ -51,14 +56,42 @@ const MangeScholarship = () => {
     editScholarshipModalref.current.showModal();
   };
   const handleDelete = async () => {};
-  const handleUpdateScholarship = (data) => {
+  const handleUpdateScholarship = async (data) => {
+    setformLoading(true);
     const sholarchipInfo = data;
-
     sholarchipInfo.serviceCharge = parseInt(sholarchipInfo.serviceCharge);
     sholarchipInfo.applicationFees = parseInt(sholarchipInfo.applicationFees);
     sholarchipInfo.tuitionFees = parseInt(sholarchipInfo.tuitionFees);
-    sholarchipInfo.applicationDeadline=new Date(sholarchipInfo.applicationDeadline)
-    console.log(sholarchipInfo)
+    sholarchipInfo.applicationDeadline = new Date(
+      sholarchipInfo.applicationDeadline
+    );
+    try {
+      const res = await Instance.patch(
+        `/scholarships/${selectedScholarship._id}`,
+        sholarchipInfo
+      );
+      if (res.data.modifiedCount) {
+        setformLoading(false);
+        allScholarshipRefetch();
+        editScholarshipModalref.current.close();
+        Swal.fire({
+          icon: "success",
+          title: "Update Successfully!",
+          draggable: true,
+        });
+      }
+    } catch (err) {
+      setformLoading(false);
+      editScholarshipModalref.current.close();
+
+      if (err) {
+        Swal.fire({
+          icon: "warning",
+          title: `Oops...${err.code}`,
+          text: "Something went wrong!",
+        });
+      }
+    }
   };
   return (
     <div>
