@@ -16,9 +16,8 @@ const ManageUsers = () => {
   });
 
   const handleChangeRole = async (id, role) => {
-
     try {
-      const res =await Instance.patch(`/users/${id}`, { role:role });
+      const res = await Instance.patch(`/users/${id}/edit`, { role: role });
       if (res.data.modifiedCount) {
         userRefetch();
         Swal.fire({
@@ -27,6 +26,40 @@ const ManageUsers = () => {
           draggable: true,
         });
       }
+    } catch (err) {
+      if (err) {
+        Swal.fire({
+          icon: "warning",
+          title: `Oops...${err.code}`,
+          text: "Something went wrong!",
+        });
+      }
+    }
+  };
+  const handleDeleteUser = async (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete",
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+            const res = await Instance.delete(`/users/${id}`);
+            console.log(res)
+         if(res.deletedCount){
+            userRefetch()
+             Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+         }
+        }
+      });
     } catch (err) {
       if (err) {
         Swal.fire({
@@ -121,7 +154,7 @@ const ManageUsers = () => {
                     </div>
                   </td>
                   <td>{user.role}</td>
-                  <td>
+                  <td className="flex gap-2">
                     <div className="dropdown dropdown-center">
                       <button
                         tabIndex={20}
@@ -172,6 +205,12 @@ const ManageUsers = () => {
                         )}
                       </ul>
                     </div>
+                    <button
+                    onClick={()=>handleDeleteUser(user._id)}
+                    
+                    className="btn btn-outline text-red-500">
+                        Delete
+                    </button>
                   </td>
                 </tr>
               );

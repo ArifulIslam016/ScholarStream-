@@ -12,7 +12,6 @@ const Register = () => {
   const [firebaseError,setFirebaseError]=useState('')
   const Instance = useSecureInstance();
   const { UpdateUserProfile, CreateUser,test } = useAuthhooks();
-console.log(test,UpdateUserProfile)
   const {
     register,
     handleSubmit,
@@ -36,7 +35,6 @@ console.log(test,UpdateUserProfile)
               photoURL: imagedata.data.data.url,
               email: data.email,
             }).then((res) => {
-              console.log(res);
               if (res.data) {
                 // console.log("User Insfo saved", res.data);
               }
@@ -48,10 +46,11 @@ console.log(test,UpdateUserProfile)
               navigate(location.state || "/");
             });
           })
-          .catch((err) => console.log(err));
+          .catch((err) =>{
+            // 
+          });
       })
       .catch((eror) => {
-        console.log(eror);
         setFirebaseError(eror)
       });
   };

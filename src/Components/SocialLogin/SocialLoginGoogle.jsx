@@ -7,7 +7,7 @@ const SocialLoginGoogle = () => {
 
   const location = useLocation();
   const {test,user, googleSocialLogin } = useAuthhooks();
-console.log(test,user)
+// console.log(test,user)
 
   const navigate = useNavigate();
   const handleSocialGoogle = () => {
@@ -27,7 +27,7 @@ console.log(test,user)
           navigate('/')
      ;
         }
-        console.log(userInfo)
+        // console.log(userInfo)
       })
 
       .catch(() => {});
