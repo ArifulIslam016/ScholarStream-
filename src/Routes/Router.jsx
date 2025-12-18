@@ -20,6 +20,7 @@ import MyReview from "../DashboardPages/StudentDashboard/MyReview";
 import AllReviews from "../DashboardPages/ModeratorDashboard/AllReviews";
 import MangeScholarship from "../DashboardPages/AdminDashboard/MangeScholarship";
 import ManageUsers from "../DashboardPages/AdminDashboard/ManageUsers";
+import Errorpage from "../Pages/Errorpage";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      { path: "/*", Component: Errorpage },
     ],
   },
   {
@@ -82,14 +84,19 @@ const router = createBrowserRouter([
       },
       {
         path: "mangeScholarships",
-        element: <AdminRoute>
-          <MangeScholarship></MangeScholarship>
-        </AdminRoute>
-      },{
-        path:'mangeUsers',
-        element:<AdminRoute>
-          <ManageUsers></ManageUsers>
-        </AdminRoute>
+        element: (
+          <AdminRoute>
+            <MangeScholarship></MangeScholarship>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "mangeUsers",
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "myapplications",
@@ -102,16 +109,21 @@ const router = createBrowserRouter([
             <ManageApplications></ManageApplications>
           </ModaratorRoute>
         ),
-      },{
-        path:'myreviews',
-        element:<MyReview></MyReview>
-      },{
-        path:'allreviews',
-        element:<ModaratorRoute>
-          <AllReviews></AllReviews>
-        </ModaratorRoute>
+      },
+      {
+        path: "myreviews",
+        element: <MyReview></MyReview>,
+      },
+      {
+        path: "allreviews",
+        element: (
+          <ModaratorRoute>
+            <AllReviews></AllReviews>
+          </ModaratorRoute>
+        ),
       },
     ],
   },
+  { path: "/*", Component: Errorpage },
 ]);
 export default router;
