@@ -18,9 +18,9 @@ const AddScholarship = () => {
   const handleAddScholarship = (data) => {
     setformLoading(true);
     const sholarchipInfo = data;
-      sholarchipInfo.serviceCharge=parseInt(sholarchipInfo.serviceCharge)
-      sholarchipInfo.applicationFees=parseInt(sholarchipInfo.applicationFees)
-      sholarchipInfo.tuitionFees=parseInt(sholarchipInfo.tuitionFees)
+    sholarchipInfo.serviceCharge = parseInt(sholarchipInfo.serviceCharge);
+    sholarchipInfo.applicationFees = parseInt(sholarchipInfo.applicationFees);
+    sholarchipInfo.tuitionFees = parseInt(sholarchipInfo.tuitionFees);
     sholarchipInfo.postedUserEmail = user.email;
     const universityFormData = new FormData();
     console.log(data.photo);
@@ -174,23 +174,24 @@ const AddScholarship = () => {
                 placeholder="Subject Category"
                 className="input  w-full"
                 {...register("subjectCategory", { required: true })}
-              /> */}     <fieldset className="fieldset">
-              <legend className="label">Subject Catagory</legend>
-              <select
-                defaultValue=""
-                {...register("scholarshipCategory", { required: true })}
-                className="select"
-              >
-                <option value="" disabled={true}>
-                  Select a subject Catagory
-                </option>
-                <option>Engineering</option>
-                <option>Science</option>
-                <option>Humanities</option>
-                <option value={'Bussiness-studies'}>Bussiness Studies</option>
-              </select>
-              <span className="label">Optional</span>
-            </fieldset>
+              /> */}{" "}
+              <fieldset className="fieldset">
+                <legend className="label">Subject Catagory</legend>
+                <select
+                  defaultValue=""
+                  {...register("scholarshipCategory", { required: true })}
+                  className="select"
+                >
+                  <option value="" disabled={true}>
+                    Select a subject Catagory
+                  </option>
+                  <option>Engineering</option>
+                  <option>Science</option>
+                  <option>Humanities</option>
+                  <option value={"Bussiness-studies"}>Bussiness Studies</option>
+                </select>
+                {/* <span className="label">Optional</span> */}
+              </fieldset>
               {errors?.subjectCategory?.type === "required" && (
                 <p className="text-red-400">Required</p>
               )}
@@ -210,7 +211,7 @@ const AddScholarship = () => {
                 <option>Partial</option>
                 <option>Self-fund</option>
               </select>
-              <span className="label">Optional</span>
+              {/* <span className="label">Optional</span> */}
             </fieldset>
             {errors?.scholarshipCategory?.type === "required" && (
               <p className="text-red-400">Select a catagory</p>
@@ -234,7 +235,7 @@ const AddScholarship = () => {
                 <option>Bachelor</option>
                 <option>Masters</option>
               </select>
-              <span className="label">Optional</span>
+              {/* <span className="label">Optional</span> */}
             </fieldset>
             {errors?.degree?.type === "required" && (
               <p className="text-red-400">Select Degree</p>
@@ -281,7 +282,10 @@ const AddScholarship = () => {
               <input
                 type="date"
                 className="input w-full"
-                {...register("applicationDeadline", { required: true, valueAsNumber:true })}
+                {...register("applicationDeadline", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
               />
               {errors?.applicationDeadline?.type === "required" && (
                 <p className="text-red-400">Give a deadline</p>
@@ -296,9 +300,11 @@ const AddScholarship = () => {
           </button>
         </form>
       </div>
-      {formLoading&&  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-     <span className="loading text-4xl loading-ring loading-xl"></span>
-    </div>}
+      {formLoading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <span className="loading text-4xl loading-ring loading-xl"></span>
+        </div>
+      )}
     </div>
   );
 };
