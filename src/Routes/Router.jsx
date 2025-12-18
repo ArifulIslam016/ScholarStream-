@@ -18,6 +18,8 @@ import ModaratorRoute from "./ModaratorRoute";
 import ManageApplications from "../DashboardPages/ModeratorDashboard/ManageApplications";
 import MyReview from "../DashboardPages/StudentDashboard/MyReview";
 import AllReviews from "../DashboardPages/ModeratorDashboard/AllReviews";
+import MangeScholarship from "../DashboardPages/AdminDashboard/MangeScholarship";
+import ManageUsers from "../DashboardPages/AdminDashboard/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +82,14 @@ const router = createBrowserRouter([
       },
       {
         path: "mangeScholarships",
+        element: <AdminRoute>
+          <MangeScholarship></MangeScholarship>
+        </AdminRoute>
+      },{
+        path:'mangeUsers',
+        element:<AdminRoute>
+          <ManageUsers></ManageUsers>
+        </AdminRoute>
       },
       {
         path: "myapplications",
@@ -100,7 +110,7 @@ const router = createBrowserRouter([
         element:<ModaratorRoute>
           <AllReviews></AllReviews>
         </ModaratorRoute>
-      }
+      },
     ],
   },
 ]);

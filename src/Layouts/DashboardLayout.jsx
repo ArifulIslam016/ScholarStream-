@@ -6,7 +6,8 @@ import { IoIosSchool } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { LiaListSolid } from "react-icons/lia";
 import { MdManageSearch, MdRateReview } from "react-icons/md";
-import { FaAllergies } from "react-icons/fa";
+import { GrMultiple } from "react-icons/gr";
+import { FaSchool, FaUsers } from "react-icons/fa";
 const DashboardLayout = () => {
   const { role } = useUserRoleHooks();
   return (
@@ -136,38 +137,68 @@ const DashboardLayout = () => {
                   >
                     <span className="text-xl">
                       {" "}
-                    <MdRateReview />
-
+                      <MdRateReview />
                     </span>
-                    <span className="is-drawer-close:hidden">
-                      My Reviews{" "}
-                    </span>
+                    <span className="is-drawer-close:hidden">My Reviews </span>
                   </Link>
                 </li>
               </>
             )}
             {/* Admin only routes */}
             {role === "admin" && (
-              <li>
-                <Link
-                  to={"/dashboard/addScholarship"}
-                  className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
-                  data-tip="Add Scholorship"
-                >
-                  <span className="text-xl">
-                    <IoIosSchool />
-                  </span>
+              <>
+                <li>
+                  <Link
+                    to={"/dashboard/addScholarship"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="Add Scholorship"
+                  >
+                    <span className="text-xl">
+                      <IoIosSchool />
+                    </span>
 
-                  <span className="is-drawer-close:hidden">
-                    Add Scholarship
-                  </span>
-                </Link>
-              </li>
+                    <span className="is-drawer-close:hidden">
+                      Add Scholarship
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/dashboard/mangeScholarships"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="Mange Scholorships"
+                  >
+                    <span className="text-xl">
+                      <FaSchool />
+                    </span>
+
+                    <span className="is-drawer-close:hidden">
+                      Manage Scholarships
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/dashboard/mangeUsers"}
+                    className="is-drawer-close:tooltip tooltip-primary is-drawer-close:tooltip-right"
+                    data-tip="Mange Users"
+                  >
+                    <span className="text-xl">
+                     <FaUsers />
+
+                    </span>
+
+                    <span className="is-drawer-close:hidden">
+                      Manage Users
+                    </span>
+                  </Link>
+                </li>
+              </>
             )}
             {/* Moderator Only Routes */}
             {role === "moderator" && (
               <>
-              {/* manage Application Route here */}
+                {/* manage Application Route here */}
                 <li>
                   <Link
                     to={"/dashboard/manageapplications"}
@@ -183,7 +214,7 @@ const DashboardLayout = () => {
                     </span>
                   </Link>
                 </li>
-              {/* manage All Reviews Route here */}
+                {/* manage All Reviews Route here */}
                 <li>
                   <Link
                     to={"/dashboard/allreviews"}
@@ -191,12 +222,10 @@ const DashboardLayout = () => {
                     data-tip="All Reviews"
                   >
                     <span className="text-xl">
-                      <FaAllergies />
+                      <GrMultiple />
                     </span>
 
-                    <span className="is-drawer-close:hidden">
-                      Manage Applications{" "}
-                    </span>
+                    <span className="is-drawer-close:hidden">All Reviews </span>
                   </Link>
                 </li>
               </>
