@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import useAuthhooks from "../hooks/Authhooks";
 import useSecureInstance from "../hooks/SecureInstance";
 import usePaymentHooks from "../hooks/PaymentHooks";
+import ScholarshipReview from "../Components/ScholarshipReview/ScholarshipReview";
 
 const DetailedScholarship = () => {
   const { user } = useAuthhooks();
@@ -145,6 +146,8 @@ const DetailedScholarship = () => {
           </div>
         </div>
       </div>
+      <h1 className="title text-center font-bold text-3xl mb-4">Reviews</h1>
+      <ScholarshipReview id={id}></ScholarshipReview>
     </div>
   );
 };
