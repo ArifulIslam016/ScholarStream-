@@ -49,7 +49,7 @@ const Navbar = () => {
           
           </Link>
         </li>
-        <li><Link to={'dashboard'} className='btn btn-primary'>Dashboard</Link></li>
+        <li><Link to={'dashboard/my-profile'} className='btn btn-primary'>Dashboard</Link></li>
         <li><button onClick={logOut} className='btn btn-warning'>Logout</button></li>
       </ul>
     </div>

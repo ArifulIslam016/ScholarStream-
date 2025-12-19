@@ -8,6 +8,7 @@ import LoadingPage from "./LoadingPage/LoadingPage";
 const AllScholarship = () => {
   const Instance = useSecureInstance();
   const [searchKey,setSearchKey]=useState('')
+  const [filterKey,setFilterKey]=useState('')
   const { data, isLoading } = useQuery({
     queryKey: ["allScholarship",searchKey],
     queryFn: async () => {
@@ -15,6 +16,9 @@ const AllScholarship = () => {
       return res.data;
     },
   });
+  const handleFilter=(key)=>{
+setFilterKey(key)
+  }
 //   if (isLoading) {
 //     return  <div className="text-center  flex justify-center items-center text-blue-400 font-extrabold">
 //       <h1 className="text-4xl">
@@ -23,7 +27,7 @@ const AllScholarship = () => {
 //       </h1> </div>;
 //   }
   //   console.log(data)
-  console.log(searchKey)
+  console.log(filterKey)
   return (
     <div className="my-10">
       <div className="flex justify-between">

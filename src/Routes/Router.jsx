@@ -21,6 +21,7 @@ import AllReviews from "../DashboardPages/ModeratorDashboard/AllReviews";
 import MangeScholarship from "../DashboardPages/AdminDashboard/MangeScholarship";
 import ManageUsers from "../DashboardPages/AdminDashboard/ManageUsers";
 import Errorpage from "../Pages/Errorpage";
+import AdminAnalitics from "../DashboardPages/AdminDashboard/AdminAnalitics";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AddScholarship></AddScholarship>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "analitics",
+        element: (
+          <AdminRoute>
+            <AdminAnalitics></AdminAnalitics>
           </AdminRoute>
         ),
       },
