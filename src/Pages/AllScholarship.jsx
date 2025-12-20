@@ -8,28 +8,30 @@ import { CiFilter } from "react-icons/ci";
 
 const AllScholarship = () => {
   const Instance = useSecureInstance();
-  const [searchKey,setSearchKey]=useState('')
-  const [catagory,setCatagory]=useState('')
-  const [sortby, setSortby]=useState('')
-  const [order,setOrder]=useState()
-  const { data, isLoading, } = useQuery({
-    queryKey: ["allScholarship",searchKey,catagory,sortby,order],
+  const [searchKey, setSearchKey] = useState("");
+  const [catagory, setCatagory] = useState("");
+  const [sortby, setSortby] = useState("");
+  const [order, setOrder] = useState();
+  const { data, isLoading } = useQuery({
+    queryKey: ["allScholarship", searchKey, catagory, sortby, order],
     queryFn: async () => {
-      const res = await Instance.get(`/scholarships?search=${searchKey}&catagory=${catagory}&sortby=${sortby}&order=${order}`);
+      const res = await Instance.get(
+        `/scholarships?search=${searchKey}&catagory=${catagory}&sortby=${sortby}&order=${order}`
+      );
       return res.data;
     },
   });
-  const handleSort=(key)=>{
-    setSortby(key.split('-')[0])
-    setOrder(key.split('-')[1])
-  }
-//   if (isLoading) {
-//     return  <div className="text-center  flex justify-center items-center text-blue-400 font-extrabold">
-//       <h1 className="text-4xl">
-//         L<span className="loading loading-spinner loading-xs"></span>
-//         ading
-//       </h1> </div>;
-//   }
+  const handleSort = (key) => {
+    setSortby(key.split("-")[0]);
+    setOrder(key.split("-")[1]);
+  };
+  //   if (isLoading) {
+  //     return  <div className="text-center  flex justify-center items-center text-blue-400 font-extrabold">
+  //       <h1 className="text-4xl">
+  //         L<span className="loading loading-spinner loading-xs"></span>
+  //         ading
+  //       </h1> </div>;
+  //   }
   //   console.log(data)
   return (
     <div className="my-10">
@@ -55,112 +57,127 @@ const AllScholarship = () => {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input defaultValue={searchKey} onChange={(e)=>setSearchKey(e.target.value)} type="search" required placeholder="Search" />
+            <input
+              defaultValue={searchKey}
+              onChange={(e) => setSearchKey(e.target.value)}
+              type="search"
+              required
+              placeholder="Search"
+            />
           </label>
-          {/* Filter functionality here */}
-          <div className="dropdown dropdown-center">
-                   <button tabIndex={20} role="button" className="btn py-1 btn-outline">
-                      <CiFilter /> catagory
-                   </button>
-                   <ul
-                     tabIndex="-1"
-                     className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 space-y-2 shadow-sm"
-                   >
-                     <li>
-                       <button onClick={() => setCatagory("")} className="btn">
-                         All
-                       </button>
-                     </li>
-                     <li>
-                       <button
-                         onClick={() => setCatagory("Self-fund")}
-                         className="btn"
-                       >
-                         Self-fund
-                       </button>
-                     </li>
-         
-                     <li>
-                       <button
-                         onClick={() => setCatagory("Partial")}
-                         className="btn "
-                       >
-                         Partial
-                       </button>
-                     </li>
-         
-                     <li>
-                       <button
-                         onClick={() => setCatagory("Full fund")}
-                         className="btn"
-                       >
-                         Full fund
-                       </button>
-                     </li>
-                   </ul>
-                 </div>
-                 {/* Sort Functionality here */}
-          <div className="dropdown dropdown-left">
-                   <button tabIndex={20} role="button" className="btn py-1 btn-outline">
-                     Sort
-                   </button>
-                   <ul
-                     tabIndex="-1"
-                     className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 space-y-2 shadow-sm"
-                   >
-                     <li>
-                       <button onClick={() => handleSort("")} className="btn">
-                         All
-                       </button>
-                     </li>
-                     <li>
-                       <button
-                         onClick={() => handleSort("postdate-dsc")}
-                         className="btn"
-                       >
-                        Post Date First to last
-                       </button>
-                     </li>
-                     <li>
-                       <button
-                         onClick={() => handleSort("postdate-asc")}
-                         className="btn"
-                       >
-                        Post Date last to frist
-                       </button>
-                     </li>
-                     <li>
-                       <button
-                         onClick={() => handleSort("applicationDeadline-dsc")}
-                         className="btn"
-                       >
-                        Deadline end last
-                       </button>
-                     </li>
-                    
-         
-                     <li>
-                       <button
-                         onClick={() => handleSort("applicationDeadline-asc")}
-                         className="btn"
-                       >
-                        Deadline end frist
-                       </button>
-                     </li>
-                     <li>
-                       <button
-                         onClick={() => handleSort("universityWorldRank-asc")}
-                         className="btn"
-                       >
-                        Top Rank
-                       </button>
-                     </li>
-                     
-                   </ul>
-                 </div>
+          <div className="flex justify-center gap-2">
+            {/* Filter functionality here */}
+            <div className="dropdown dropdown-left">
+              <button
+                tabIndex={20}
+                role="button"
+                className="btn py-1 btn-outline"
+              >
+                <CiFilter /> <span className="hidden  sm:block">catagory</span>
+              </button>
+              <ul
+                tabIndex="-1"
+                className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 space-y-2 shadow-sm"
+              >
+                <li>
+                  <button onClick={() => setCatagory("")} className="btn">
+                    All
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setCatagory("Self-fund")}
+                    className="btn"
+                  >
+                    Self-fund
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    onClick={() => setCatagory("Partial")}
+                    className="btn "
+                  >
+                    Partial
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    onClick={() => setCatagory("Full fund")}
+                    className="btn"
+                  >
+                    Full fund
+                  </button>
+                </li>
+              </ul>
+            </div>
+            {/* Sort Functionality here */}
+            <div className="dropdown dropdown-left">
+              <button
+                tabIndex={20}
+                role="button"
+                className="btn py-1 btn-outline"
+              >
+                Sort
+              </button>
+              <ul
+                tabIndex="-1"
+                className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 space-y-2 shadow-sm"
+              >
+                <li>
+                  <button onClick={() => handleSort("")} className="btn">
+                    All
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleSort("postdate-dsc")}
+                    className="btn"
+                  >
+                    Post Date First to last
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleSort("postdate-asc")}
+                    className="btn"
+                  >
+                    Post Date last to frist
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleSort("applicationDeadline-dsc")}
+                    className="btn"
+                  >
+                    Deadline end last
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    onClick={() => handleSort("applicationDeadline-asc")}
+                    className="btn"
+                  >
+                    Deadline end frist
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleSort("universityWorldRank-asc")}
+                    className="btn"
+                  >
+                    Top Rank
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      {isLoading&& <LoadingPage></LoadingPage>}
+
+      {isLoading && <LoadingPage></LoadingPage>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
         {data?.ScholarshipData?.map((scholarshipdata, index) => {
           return (
