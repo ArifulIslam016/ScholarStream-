@@ -100,7 +100,7 @@ const AllScholarship = () => {
                    </ul>
                  </div>
                  {/* Sort Functionality here */}
-          <div className="dropdown dropdown-center">
+          <div className="dropdown dropdown-left">
                    <button tabIndex={20} role="button" className="btn py-1 btn-outline">
                      Sort
                    </button>
@@ -134,29 +134,28 @@ const AllScholarship = () => {
                          onClick={() => handleSort("applicationDeadline-dsc")}
                          className="btn"
                        >
-                        Deadline end frist
+                        Deadline end last
                        </button>
                      </li>
+                    
          
                      <li>
                        <button
                          onClick={() => handleSort("applicationDeadline-asc")}
                          className="btn"
                        >
-                        Deadline end last
+                        Deadline end frist
                        </button>
                      </li>
-         
-                     
-         
                      <li>
                        <button
-                         onClick={() => setCatagory("Full fund")}
+                         onClick={() => handleSort("universityWorldRank-asc")}
                          className="btn"
                        >
-                         Admin
+                        Top Rank
                        </button>
                      </li>
+                     
                    </ul>
                  </div>
         </div>

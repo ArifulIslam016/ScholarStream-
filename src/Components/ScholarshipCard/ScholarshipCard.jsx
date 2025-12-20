@@ -13,6 +13,7 @@ const ScholarshipCard = ({ scholarshipdata }) => {
     applicationFees,
     scholarshipCategory,
     postdate,
+    universityWorldRank
   } = scholarshipdata;
   return (
     <motion.div
@@ -45,6 +46,9 @@ const ScholarshipCard = ({ scholarshipdata }) => {
 
         <p className="text-xs bg-[#1d695e]/10 text-[#0b5e52] w-fit px-2 py-1 rounded-md">
           {scholarshipCategory}
+        </p>
+        <p className="text-xs bg-[#1d695e]/10 text-[#0b5e52] w-fit px-2 py-1 rounded-md">
+         World Rank: {universityWorldRank}
         </p>
 
         <p className="text-xs text-gray-500">
