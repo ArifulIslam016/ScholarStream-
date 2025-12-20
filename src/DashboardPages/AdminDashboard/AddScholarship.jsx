@@ -23,7 +23,7 @@ const AddScholarship = () => {
     sholarchipInfo.tuitionFees = parseInt(sholarchipInfo.tuitionFees);
     sholarchipInfo.postedUserEmail = user.email;
     const universityFormData = new FormData();
-    console.log(data.photo);
+    // console.log(data.photo);
     universityFormData.append("image", data.photo[0]);
     //  console.log(sholarchipInfo)
     delete sholarchipInfo.photo;
@@ -34,13 +34,13 @@ const AddScholarship = () => {
     axios
       .post(imagebbHostApi, universityFormData)
       .then((universityImagedata) => {
-        console.log(universityImagedata);
+        // console.log(universityImagedata);
         sholarchipInfo.universityImage = universityImagedata.data.data.url;
-        console.log(sholarchipInfo);
+        // console.log(sholarchipInfo);
         Instance.post("/scholarships", sholarchipInfo)
           .then((res) => {
             setformLoading(false);
-            console.log(res);
+            // console.log(res);
             if (res.data.insertedId) {
               Swal.fire({
                 title: "Scholarship addes succesfully",

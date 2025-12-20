@@ -1,5 +1,4 @@
 import React from "react";
-import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cards";
@@ -23,7 +22,7 @@ const ScholarshipReview = ({ id }) => {
   if (isLoading) {
     return <LoadingPage></LoadingPage>;
   }
-  console.log(scholarshipReviews);
+  // console.log(scholarshipReviews);
 
   return (
     <div className="mb-10">

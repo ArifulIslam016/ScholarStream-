@@ -35,7 +35,7 @@ const AllReviews = () => {
       .then(async (result) => {
         if (result.isConfirmed) {
           const res = await Instance.delete(`/reviews/${review._id}`);
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.deletedCount) {
             reviewRefetch();
             swalWithBootstrapButtons.fire({

@@ -31,7 +31,7 @@ const usePaymentHooks = () => {
         "/create-checkout-session",
         payingSholcarship
       );
-      console.log(res);
+      // console.log(res);
       window.location.assign(res.data.url);
     } catch (err) {
       if (err.status === 400) {

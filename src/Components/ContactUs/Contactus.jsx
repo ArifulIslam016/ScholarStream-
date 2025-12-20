@@ -4,10 +4,7 @@ import { motion } from "framer-motion";
 const Contactus = () => {
   return (
     <section className="w-11/12 mx-auto py-16 bg-secondary">
-      <div
-     
-        className="text-center mb-10"
-      >
+      <div className="text-center mb-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}

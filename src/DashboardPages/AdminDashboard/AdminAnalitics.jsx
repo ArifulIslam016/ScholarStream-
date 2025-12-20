@@ -17,7 +17,7 @@ const AdminAnalitics = () => {
     return <LoadingPage></LoadingPage>;
   }
   const data = [...analiticsInfo.applicationPerUniversity];
-  console.log(analiticsInfo.applicationPerUniversity);
+  // console.log(analiticsInfo.applicationPerUniversity);
   return (
     <div>
       <div className="stats bg-base-200 border-base-300 border flex justify-center text-center p-2 space-x-1 gap-3">

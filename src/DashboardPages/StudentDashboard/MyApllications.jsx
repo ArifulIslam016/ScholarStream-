@@ -64,7 +64,7 @@ const MyApllications = () => {
       if (result.isConfirmed) {
         Instance.delete(`/apllications/${selectedApplication._id}`)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             if (res.data.deletedCount) {
               refetch();
               Swal.fire({
@@ -87,7 +87,7 @@ const MyApllications = () => {
   const handleEditApplication = async (e) => {
     e.preventDefault();
     editModalRef.current.close();
-    console.log(e.target.email);
+    // console.log(e.target.email);
     Swal.fire({
       title: "Do you want to save the changes?",
       showDenyButton: true,
@@ -102,7 +102,7 @@ const MyApllications = () => {
             name: e.target.name.value,
           }
         );
-        console.log(response);
+        // console.log(response);
         if (response.data.modifiedCount) {
           Swal.fire("Saved!", "", "success");
         }
@@ -127,7 +127,7 @@ const MyApllications = () => {
       reviewComment: e.target.reviewCommnet.value,
       reviewStar: parseInt(rateStarNo),
     };
-    console.log(reviewInfo);
+    // console.log(reviewInfo);
     const res = await Instance.post("/reviews", reviewInfo).catch((err) => {
       if (err.status === 400) {
         reviewModalRef.current.close();
@@ -139,7 +139,7 @@ const MyApllications = () => {
         });
       }
     });
-    console.log(res);
+    // console.log(res);
     if (res.data.insertedId) {
       Swal.fire({
         title: "Thank you!",

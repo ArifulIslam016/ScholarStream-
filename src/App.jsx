@@ -7,7 +7,9 @@ import { Authcontext } from './Contexts/AuthContext/AuthContext'
 function App() {
 const {googleSocialLogin}=use(Authcontext)
 const handleSocialLogin=()=>{
-  googleSocialLogin().then(res=>console.log(res))
+  googleSocialLogin().then(res=>{
+    
+  })
 }
   return (
     <>

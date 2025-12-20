@@ -51,7 +51,7 @@ const MyReview = () => {
       .then(async (result) => {
         if (result.isConfirmed) {
           const res = await Instance.delete(`/reviews/${review._id}`);
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.deletedCount) {
             reviewRefetch();
             swalWithBootstrapButtons.fire({
@@ -79,7 +79,7 @@ const MyReview = () => {
       reviewComment: e.target.updatedReviewCommnet.value,
     };
     const res = await Instance.patch(`/reviews/${selectedReview._id}/edit`,updatedInfo);
-    console.log(res);
+    // console.log(res);
     if (res.data.modifiedCount) {
         reviewRefetch()
       Swal.fire({
