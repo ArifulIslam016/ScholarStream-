@@ -10,15 +10,18 @@ const AllScholarship = () => {
   const Instance = useSecureInstance();
   const [searchKey,setSearchKey]=useState('')
   const [catagory,setCatagory]=useState('')
+  const [sortby, setSortby]=useState('')
+  const [order,setOrder]=useState()
   const { data, isLoading, } = useQuery({
-    queryKey: ["allScholarship",searchKey,catagory],
+    queryKey: ["allScholarship",searchKey,catagory,sortby,order],
     queryFn: async () => {
-      const res = await Instance.get(`/scholarships?search=${searchKey}&catagory=${catagory}`);
+      const res = await Instance.get(`/scholarships?search=${searchKey}&catagory=${catagory}&sortby=${sortby}&order=${order}`);
       return res.data;
     },
   });
-  const handleSetCatagory=(key)=>{
-    setCatagory(key)
+  const handleSort=(key)=>{
+    setSortby(key.split('-')[0])
+    setOrder(key.split('-')[1])
   }
 //   if (isLoading) {
 //     return  <div className="text-center  flex justify-center items-center text-blue-400 font-extrabold">
@@ -63,7 +66,7 @@ const AllScholarship = () => {
                      className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 space-y-2 shadow-sm"
                    >
                      <li>
-                       <button onClick={() => handleSetCatagory("")} className="btn">
+                       <button onClick={() => setCatagory("")} className="btn">
                          All
                        </button>
                      </li>
@@ -84,6 +87,48 @@ const AllScholarship = () => {
                          Partial
                        </button>
                      </li>
+         
+                     <li>
+                       <button
+                         onClick={() => setCatagory("Full fund")}
+                         className="btn"
+                       >
+                         Full fund
+                       </button>
+                     </li>
+                   </ul>
+                 </div>
+          <div className="dropdown dropdown-center">
+                   <button tabIndex={20} role="button" className="btn py-1 btn-outline">
+                     Sort
+                   </button>
+                   <ul
+                     tabIndex="-1"
+                     className="dropdown-content  menu bg-base-100 rounded-box z-999 w-52 p-2 space-y-2 shadow-sm"
+                   >
+                     <li>
+                       <button onClick={() => handleSort("")} className="btn">
+                         All
+                       </button>
+                     </li>
+                     <li>
+                       <button
+                         onClick={() => handleSort("postdate-dsc")}
+                         className="btn"
+                       >
+                        Post Date First to last
+                       </button>
+                     </li>
+                     <li>
+                       <button
+                         onClick={() => handleSort("postdate-asc")}
+                         className="btn"
+                       >
+                        Post Date last to frist
+                       </button>
+                     </li>
+         
+                     
          
                      <li>
                        <button
