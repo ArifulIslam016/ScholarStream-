@@ -57,6 +57,7 @@ const AllScholarship = () => {
             </svg>
             <input defaultValue={searchKey} onChange={(e)=>setSearchKey(e.target.value)} type="search" required placeholder="Search" />
           </label>
+          {/* Filter functionality here */}
           <div className="dropdown dropdown-center">
                    <button tabIndex={20} role="button" className="btn py-1 btn-outline">
                       <CiFilter /> catagory
@@ -98,6 +99,7 @@ const AllScholarship = () => {
                      </li>
                    </ul>
                  </div>
+                 {/* Sort Functionality here */}
           <div className="dropdown dropdown-center">
                    <button tabIndex={20} role="button" className="btn py-1 btn-outline">
                      Sort
@@ -125,6 +127,23 @@ const AllScholarship = () => {
                          className="btn"
                        >
                         Post Date last to frist
+                       </button>
+                     </li>
+                     <li>
+                       <button
+                         onClick={() => handleSort("applicationDeadline-dsc")}
+                         className="btn"
+                       >
+                        Deadline end frist
+                       </button>
+                     </li>
+         
+                     <li>
+                       <button
+                         onClick={() => handleSort("applicationDeadline-asc")}
+                         className="btn"
+                       >
+                        Deadline end last
                        </button>
                      </li>
          

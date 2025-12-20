@@ -270,6 +270,7 @@ const MangeScholarship = () => {
                         defaultValue={selectedScholarship.subjectCategory}
                         // {...register("scholarshipCategory")}
                         className="select"
+                        {...register("subjectCategory")}
                       >
                         <option
                           defaultValue={selectedScholarship.subjectCategory}
@@ -411,7 +412,7 @@ const MangeScholarship = () => {
               </form>
             </div>
             {formLoading && (
-              <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+              <div className="fixed inset-0 flex items-center h-full justify-center bg-black/50 z-50">
                 <span className="loading text-4xl loading-ring loading-xl"></span>
               </div>
             )}
