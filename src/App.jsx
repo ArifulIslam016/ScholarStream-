@@ -8,7 +8,7 @@ function App() {
 const {googleSocialLogin}=use(Authcontext)
 const handleSocialLogin=()=>{
   googleSocialLogin().then(res=>{
-    
+    //jfjjfj
   })
 }
   return (

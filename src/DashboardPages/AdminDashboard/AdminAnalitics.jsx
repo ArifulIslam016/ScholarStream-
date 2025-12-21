@@ -6,7 +6,7 @@ import { Bar, BarChart, Tooltip, XAxis } from "recharts";
 
 const AdminAnalitics = () => {
   const Instance = useSecureInstance();
-  const { data: analiticsInfo, isLoading,refetch } = useQuery({
+  const { data: analiticsInfo, isLoading, } = useQuery({
     queryKey: ["analiticsInfo"],
     queryFn: async () => {
       const res = await Instance.get("/scholarship/analitics");

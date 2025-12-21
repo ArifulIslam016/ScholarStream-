@@ -1,7 +1,7 @@
 import React from "react";
 import useSecureInstance from "./SecureInstance";
 import useAuthhooks from "./Authhooks";
-import { degrees } from "motion";
+// import { degrees } from "motion";
 import Swal from "sweetalert2";
 
 const usePaymentHooks = () => {

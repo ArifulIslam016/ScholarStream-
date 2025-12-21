@@ -139,6 +139,7 @@ const MyApllications = () => {
         });
       }
     });
+    // console.log(res);
     if (res.data.insertedId) {
       Swal.fire({
         title: "Thank you!",
