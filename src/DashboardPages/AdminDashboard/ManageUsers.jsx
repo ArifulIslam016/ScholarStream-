@@ -49,7 +49,7 @@ const ManageUsers = () => {
       }).then(async(result) => {
         if (result.isConfirmed) {
             const res = await Instance.delete(`/users/${id}`);
-            console.log(res)
+            // console.log(res)
          if(res.deletedCount){
             userRefetch()
              Swal.fire({
