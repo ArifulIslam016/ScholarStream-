@@ -10,5 +10,16 @@
 - Easy apply and update view section
 - Secure user authentication
 - Responsive and user-friendly interface
-### npm pake uses
-
+### Npm pake uses
+"@tailwindcss/vite": "^4.1.17",
+    -@tanstack/react-query: "^5.90.12",
+    -axios: "^1.13.2",
+    -firebase: "^12.6.0",
+    -motion: "^12.23.25",
+    -react-hook-form: "^7.68.0",
+    -react-icons: "^5.5.0",
+    -react-router: "^7.10.1",
+    -recharts: "^3.6.0",
+    -sweetalert2: "^11.26.4",
+    -swiper: "^12.0.3",
+    -tailwindcss: "^4.1.17"
